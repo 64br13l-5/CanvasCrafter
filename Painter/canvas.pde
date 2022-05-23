@@ -1,10 +1,8 @@
 public class canvas{
   public LinkedList<paint>paintList;
-  private int toolType;
   private boolean enabled; 
   public canvas(){
     enabled = true; 
-    toolType = 1; 
     paintList = new LinkedList<paint>();
   }
   public boolean isEnabled(){
