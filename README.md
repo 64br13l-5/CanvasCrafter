@@ -3,14 +3,10 @@
 
 Final project for Mr. K's class, Gabriel Small and Alisa Aleksandrova
 
-## Brief Project Summary
+## What is it? (Brief Project Summary)
 
-> Our goal for this project is to create a drawing program in Processing. It will have a canvas to draw on and an interface that includes a pencil and eraser tool. This will allow the user to draw on their computer. There will also be different colors available, and other tools such as the bucket tool and selection/transformation may be added.
+> This project is a painting utility made in processing. Similar to microsoft paint or procreate, this project will be primarily for drawing on a digital canvas and creating images. The base features will include a drawing tool, an eraser and the ability to clear the canvas and restart. Other features that will be implemented may include a color selector, a bucket tool, a tool size changer, and a dropper. 
 
-
-## What is it?
-
-> This is a painting program in processing, similar to microsoft paint or other painting applications
 
 ## Prototype Document
  
