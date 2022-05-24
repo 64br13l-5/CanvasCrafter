@@ -1,4 +1,4 @@
-import java.util.LinkedList;
+import java.util.*;
 LinkedList<canvas>layers;
 int sx;
 int toolType;
@@ -7,13 +7,19 @@ int sy;
 int count; 
 int chosen=0;
 boolean e = true;
+tool t;
+int sw;
+int c;
 void setup(){
   
   size(1000,800);
   background(255);
   layers = new LinkedList<canvas>();
   layers.add(new canvas());
-  toolType = 1;
+  sw = 2;
+  c = 0;
+  t = new pen(c, sw);
+  //toolType = 1;
 }
 void mouseClicked(){
   if((mouseX > 30 && mouseX < 60) && (mouseY > 30 && mouseY < 60)){
@@ -40,11 +46,20 @@ void mouseClicked(){
   
 
 }
+
+void keyPressed() {
+  if (key == 'e') {
+    t = new Eraser(sw);
+  }
+  if (key == 'p') {
+    t = new pen(c, sw);
+  }
+}
 void draw(){
   if(mousePressed){
     canvas a = layers.get(chosen);
     if(a.isEnabled())
-   a.addPaint(new paint(mouseX,mouseY,sx,sy,0,2));
+   a.addPaint(t.makePaint());
   }
   for(canvas i : layers){
     if(i.isEnabled()){
