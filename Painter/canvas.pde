@@ -1,8 +1,9 @@
 public class canvas{
   public LinkedList<paint>paintList;
   private boolean enabled; 
+  public int count; 
   public canvas(){
-    enabled = true; 
+    enabled = false; 
     paintList = new LinkedList<paint>();
   }
   public boolean isEnabled(){

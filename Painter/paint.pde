@@ -10,8 +10,10 @@ public class paint{
     strw = sw; 
   }
   public void drawLine(){
+    push();
     fill(c);
     strokeWeight(strw);
     line(x,y,xstart,ystart);
+    pop();
   }
 }
