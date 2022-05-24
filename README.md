@@ -11,3 +11,8 @@ Final project for Mr. K's class, Gabriel Small and Alisa Aleksandrova
 ## Prototype Document
  
 > https://docs.google.com/document/d/1oBpQWmZz5VQUnwzEelrC2NTm3FDGipTzGh3_sjGXFHs/edit?usp=sharing
+
+
+WorkLog:
+5/23/22
+Alisa: tweaked the way the tools class works, added a slider for strokewidth
