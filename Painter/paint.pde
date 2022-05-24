@@ -11,7 +11,7 @@ public class paint{
   }
   public void drawLine(){
     push();
-    fill(c);
+    stroke(c);
     strokeWeight(strw);
     line(x,y,xstart,ystart);
     pop();
