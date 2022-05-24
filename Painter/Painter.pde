@@ -1,24 +1,26 @@
-import java.util.LinkedList;
+import java.util.*;
 LinkedList<canvas>layers;
 import javax.swing.JColorChooser;
 import java.awt.Color;
 int sx;
-int toolType;
+//int toolType;
 int time;
 int sy; 
 canvas a;
 color C = 0;
 int chosen=0;
 boolean e = true;
+tool t;
+int sw;
 void setup() {
-
   size(1000, 800);
   background(255);
   layers = new LinkedList<canvas>();
   layers.add(new canvas());
   layers.getFirst().enable(true);
-  toolType = 1;
   a = layers.get(chosen);
+  sw = 2;
+  t = new pen(C, sw);
 }
 void mouseClicked() {
   if ((mouseX > 30 && mouseX < 60) && (mouseY > 30 && mouseY < 60)) {
@@ -36,6 +38,7 @@ void mouseClicked() {
     Color c;
     c = JColorChooser.showDialog(null, "Choose a Color", Color.black);
     if (c != null) C = color(c.getRed(), c.getGreen(), c.getBlue());
+    t.setC(C);
   }
   for (int i = 1; i <= layers.size(); i++) {
     if ((mouseX > 30+60*i && mouseX < 60+60*i) && (mouseY > 30 && mouseY < 60)) {
@@ -46,10 +49,32 @@ void mouseClicked() {
     }
   }
 }
+
+void keyPressed() {
+  //if (key == 'z') {
+  //  layers.get(chosen).paintList.removeLast();
+  //}
+  if (key == 'e') {
+    t = new Eraser(sw);
+  }
+  if (key == 'p') {
+    t = new pen(C, sw);
+  }
+}
 void draw() {
-  if (mousePressed) {
+
+  rect(140, 30, 200, 30);
+  line(155, 45, 330, 45);
+  if ((mouseX > 155 && mouseX < 330) && mouseY > 30 && mouseY < 60 && mousePressed) {
+    sw = mouseX - 155;
+    t.setSW(sw);
+    circle(mouseX, 45, 20);
+  }
+  
+  else if (mousePressed) {
+    canvas a = layers.get(chosen);
     if (a.isEnabled())
-      a.addPaint(new paint(mouseX, mouseY, sx, sy, C, 2));
+      a.addPaint(t.makePaint());
   }
   for (canvas i : layers) {
     if (i.isEnabled()) {
@@ -91,4 +116,5 @@ void draw() {
   strokeWeight(1);
   square(30, 90, 30);
   pop();
+  //circle(95, 45, 20);
 }
