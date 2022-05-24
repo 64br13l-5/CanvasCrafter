@@ -3,7 +3,7 @@ LinkedList<canvas>layers;
 import javax.swing.JColorChooser;
 import java.awt.Color;
 int sx;
-int toolType;
+//int toolType;
 int time;
 int sy; 
 color C = 0;
@@ -50,6 +50,9 @@ void mouseClicked() {
 }
 
 void keyPressed() {
+  //if (key == 'z') {
+  //  layers.get(chosen).paintList.removeLast();
+  //}
   if (key == 'e') {
     t = new Eraser(sw);
   }
