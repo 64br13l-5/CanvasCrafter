@@ -8,6 +8,7 @@ int time;
 int sy; 
 canvas a;
 color C = 0;
+int cx = (155);
 int chosen=0;
 boolean e = true;
 tool t;
@@ -24,10 +25,10 @@ void setup() {
 }
 void mouseClicked() {
   if ((mouseX > 30 && mouseX < 60) && (mouseY > 30 && mouseY < 60)) {
+    
     a.paintList.clear();
     background(255);
     a.count = 0;
-    stroke(color(#00ff00));
     square(30, 30, 30);
     time = millis();
   }
@@ -62,13 +63,16 @@ void keyPressed() {
   }
 }
 void draw() {
-
-  rect(140, 30, 200, 30);
-  line(155, 45, 330, 45);
-  if ((mouseX > 155 && mouseX < 330) && mouseY > 30 && mouseY < 60 && mousePressed) {
-    sw = mouseX - 155;
+  fill(190,190,190,255);
+  rect(0,0,width,120);
+  fill(255);
+  rect(140, 90, 205, 30);
+  line(155, 105, 330, 105);
+  circle(cx,105,20);
+  if ((mouseX > 140 && mouseX < 345) && mouseY > 90 && mouseY < 120 && mousePressed) {
+    sw = constrain(mouseX - 155,0,155);
     t.setSW(sw);
-    circle(mouseX, 45, 20);
+    cx = constrain(mouseX,155,330);
   }
   
   else if (mousePressed) {
@@ -87,34 +91,29 @@ void draw() {
   sx = mouseX;
   sy = mouseY;
   for (int i = 1; i <= layers.size(); i++) {
-
     strokeWeight(1);
-    push();
+    pushStyle();
     if (layers.get(i-1).isEnabled())    
       stroke(color(0, 255, 0));
-
     square(30 + 60 *i, 30, 30);
-
     fill(0);
     text("layer " + i, 30 + 60 * i, 30, 30, 30);
-    pop();
+    popStyle();
   }
-  if (millis() - time > 300)
-    stroke(0);
-  strokeWeight(1);
+  pushStyle();
+  if (millis() - time < 300)
+    stroke(0,255,0);
   square(30, 30, 30);
-  push();
+  popStyle();
   fill(0);
   text("clear", 32, 45);
-  push();
+  pushStyle();
   fill(0, 0, 255);
   textSize(42);
   text("+", 90, 118);
-  pop();
-  stroke(0);
+  popStyle();
   fill(C);
-  strokeWeight(1);
   square(30, 90, 30);
-  pop();
+ // pop();
   //circle(95, 45, 20);
 }
