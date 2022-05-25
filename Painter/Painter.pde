@@ -74,7 +74,7 @@ void draw() {
   line(215, 105, 390, 105);
   circle(cx, 105, 20);
   if ((mouseX > 200 && mouseX < 405) && mouseY > 90 && mouseY < 120 && mousePressed) {
-    sw = (int)(norm(mouseX - 215, 0, 100) * 100);
+    sw = (int)(constrain(mouseX-215,0,175)*0.571428571);
     println(sw);
     e.setSW(sw);
     p.setSW(sw);
