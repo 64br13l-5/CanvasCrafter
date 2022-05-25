@@ -40,6 +40,10 @@ void mouseClicked() {
   else if ((mouseX > 90 && mouseX < 120) && (mouseY > 90 && mouseY < 120)) {
     layers.add(new canvas());
   }
+  else if ((mouseX > 150 && mouseX < 180) && (mouseY > 90 && mouseY < 120)) {
+    if(layers.size() > 1)
+    layers.removeLast();
+  }
   else if ((mouseX > 435 && mouseX < 465) && (mouseY > 90 && mouseY < 120)) {
     t = e;
   }
@@ -112,6 +116,8 @@ void draw() {
   fill((t.equals(b)) ? #00ff00 : 255);
   square(555, 90, 30);
   fill(255);
+  circle(105,105,30);
+   circle(165,105,30);
   pushStyle();
   if (millis() - time < 300)
     stroke(0, 255, 0);
@@ -127,7 +133,10 @@ void draw() {
   pushStyle();
   fill(0, 0, 255);
   textSize(42);
-  text("+", 90, 118);
+  text("+", 89, 118);
+  fill(255,0,0);
+  textSize(50);
+  text("-", 151, 120);
   popStyle();
   fill(C);
   square(30, 90, 30);
