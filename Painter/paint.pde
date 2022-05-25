@@ -15,8 +15,12 @@ public class paint {
     if(x > width || x<0 || y>height || y<0) return;
     color C = get(x,y);
     if(red(C) == red(c) && blue(C) == blue(c) && green(c) == green(C)) return;
-    point(x,y);
-    filltool(x+1,y);
+    circle(x,y,4);
+    filltool(x,y+4);
+    filltool(x,y-4);
+    filltool(x+4,y);
+    filltool(x-4,y);
+    
   }
   public void drawLine() {
     if (bucket == true) {

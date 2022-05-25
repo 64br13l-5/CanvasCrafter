@@ -8,7 +8,7 @@ int time;
 int sy; 
 canvas a;
 color C = 0;
-int cx = (155);
+int cx = (215);
 int chosen=0;
 pen p; 
 Eraser e; 
@@ -40,13 +40,13 @@ void mouseClicked() {
   else if ((mouseX > 90 && mouseX < 120) && (mouseY > 90 && mouseY < 120)) {
     layers.add(new canvas());
   }
-  else if ((mouseX > 375 && mouseX < 405) && (mouseY > 90 && mouseY < 120)) {
+  else if ((mouseX > 435 && mouseX < 465) && (mouseY > 90 && mouseY < 120)) {
     t = e;
   }
-  else if ((mouseX > 435 && mouseX < 465) && (mouseY > 90 && mouseY < 120)) {
+  else if ((mouseX > 495 && mouseX < 525) && (mouseY > 90 && mouseY < 120)) {
     t = p;
   }
-    else if ((mouseX > 495 && mouseX < 525) && (mouseY > 90 && mouseY < 120)) {
+    else if ((mouseX > 555 && mouseX < 605) && (mouseY > 90 && mouseY < 120)) {
     t = b;
   }
   else if ((mouseX > 30 && mouseX < 60) && (mouseY > 90 && mouseY < 120)) {
@@ -70,14 +70,15 @@ void draw() {
   fill(190, 190, 190, 255);
   rect(0, 0, width, 120);
   fill(255);
-  rect(140, 90, 205, 30);
-  line(155, 105, 330, 105);
+  rect(200, 90, 205, 30);
+  line(215, 105, 390, 105);
   circle(cx, 105, 20);
-  if ((mouseX > 140 && mouseX < 345) && mouseY > 90 && mouseY < 120 && mousePressed) {
-    sw = constrain(mouseX - 155, 0, 155);
+  if ((mouseX > 200 && mouseX < 405) && mouseY > 90 && mouseY < 120 && mousePressed) {
+    sw = (int)(norm(mouseX - 215, 0, 100) * 100);
+    println(sw);
     e.setSW(sw);
     p.setSW(sw);
-    cx = constrain(mouseX, 155, 330);
+    cx = constrain(mouseX, 215, 390);
   } else if (mousePressed) {
     canvas a = layers.get(chosen);
     if (a.isEnabled())
@@ -105,11 +106,11 @@ void draw() {
   }
   
   fill((t.equals(e)) ? #00ff00 : 255);
-  square(375, 90, 30);
-  fill((t.equals(p)) ? #00ff00 : 255);
   square(435, 90, 30);
-  fill((t.equals(b)) ? #00ff00 : 255);
+  fill((t.equals(p)) ? #00ff00 : 255);
   square(495, 90, 30);
+  fill((t.equals(b)) ? #00ff00 : 255);
+  square(555, 90, 30);
   fill(255);
   pushStyle();
   if (millis() - time < 300)
@@ -118,11 +119,11 @@ void draw() {
   popStyle();
   fill(0);
   text("clear", 32, 45);
-  text("pen", 437, 105);
+  text("pen", 497, 105);
   textSize(10);
-  text("eraser", 375, 105);
+  text("eraser", 435, 105);
   textSize(9);
-  text("bucket", 495,105);
+  text("bucket", 555,105);
   pushStyle();
   fill(0, 0, 255);
   textSize(42);
