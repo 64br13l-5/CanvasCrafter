@@ -3,12 +3,11 @@ public class tool{
   private int sw;
   private color c;
 
-  
   public int getIndex() {
     return index;
   }
   public paint makePaint() {
-    return new paint(mouseX, mouseY, sx, sy, 0, 2);
+    return new paint(mouseX, mouseY, sx, sy, 0, 2,false);
   }
   public void setSW(int sw) {
     this.sw = sw;

@@ -1,19 +1,33 @@
-public class paint{
-  private int x,y,xstart,ystart,strw;
+public class paint {
+  private int x, y, xstart, ystart, strw;
   private color c;
-  public paint(int X,int Y,int xs,int ys,color col, int sw){
+  private boolean bucket;
+  public paint(int X, int Y, int xs, int ys, color col, int sw, boolean bucket) {
     x = X;
     y = Y;
     xstart = xs;
     ystart = ys;
     c = col;
     strw = sw; 
+    this.bucket = bucket;
   }
-  public void drawLine(){
-    pushStyle();
-    stroke(c);
-    strokeWeight(strw);
-    line(x,constrain(y,120,height),xstart,constrain(ystart,120,height));
-    popStyle();
+  public void filltool(int x,int y){
+    if(x > width || x<0 || y>height || y<0) return;
+    color C = get(x,y);
+    if(red(C) == red(c) && blue(C) == blue(c) && green(c) == green(C)) return;
+    point(x,y);
+    filltool(x+1,y);
+  }
+  public void drawLine() {
+    if (bucket == true) {
+      fill(c);
+      filltool(x,y);
+    } else {
+      pushStyle();
+      stroke(c);
+      strokeWeight(strw);
+      line(x, constrain(y, 120, height), xstart, constrain(ystart, 120, height));
+      popStyle();
+    }
   }
 }
