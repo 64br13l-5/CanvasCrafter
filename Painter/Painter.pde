@@ -9,19 +9,19 @@ int sy;
 canvas a;
 color C = 0;
 int cx = (215);
-int chosen=0;
 pen p; 
 Eraser e; 
 tool t;
 Bucket b;
 int sw;
 void setup() {
+  //frameRate(1);
   size(1000, 800);
   background(255);
   layers = new LinkedList<canvas>();
   layers.add(new canvas());
   layers.getFirst().enable(true);
-  a = layers.get(chosen);
+  a = layers.get(0);
   sw = 2;
   p = new pen(C,sw);
   e = new Eraser(sw);
@@ -33,7 +33,6 @@ void mouseClicked() {
   if ((mouseX > 30 && mouseX < 60) && (mouseY > 30 && mouseY < 60)) {
     a.paintList.clear();
     background(255);
-    a.count = 0;
     square(30, 30, 30);
     time = millis();
   }
@@ -60,13 +59,20 @@ void mouseClicked() {
     p.setC(C);
   }
   else for (int i = 1; i <= layers.size(); i++) {
-    if ((mouseX > 30+60*i && mouseX < 60+60*i) && (mouseY > 30 && mouseY < 60)) {
+    if (mouseX > 30+60*i && mouseX < 60+60*i) {
+      if (mouseY > 30 && mouseY < 60) {
       background(255);
       canvas current = layers.get(i-1);
       boolean e = current.isEnabled();
       current.enable(e = !e);
-      a.count=0;
+      for(canvas j : layers) j.count = 0;
     }
+    else if(mouseY > 5 && mouseY < 30) {
+      a = layers.get(i-1);
+
+    }
+    }
+    
   }
 }
 
@@ -79,20 +85,21 @@ void draw() {
   circle(cx, 105, 20);
   if ((mouseX > 200 && mouseX < 405) && mouseY > 90 && mouseY < 120 && mousePressed) {
     sw = (int)(constrain(mouseX-215,0,175)*0.571428571);
-    println(sw);
     e.setSW(sw);
     p.setSW(sw);
     cx = constrain(mouseX, 215, 390);
   } else if (mousePressed) {
-    canvas a = layers.get(chosen);
-    if (a.isEnabled())
+    
+    if (a.isEnabled()){   
       a.addPaint(t.makePaint());
+    }
   }
   for (canvas i : layers) {
     if (i.isEnabled()) {
-      for (int j = a.count; j < i.paintList.size(); j++) {
+      for (int j = i.count; j < i.paintList.size(); j++) {
         i.paintList.get(j).drawLine();
-        a.count++;
+        i.count++;
+      
       }
     }
   }
@@ -103,7 +110,11 @@ void draw() {
     pushStyle();
     if (layers.get(i-1).isEnabled())    
       stroke(color(0, 255, 0));
+    fill((a == layers.get(i-1)) ? #00ccee : 255);
+    triangle(35+60*i,10,55+60*i,10,45+60*i,25);
+    fill(255);
     square(30 + 60 *i, 30, 30);
+    
     fill(0);
     text("layer " + i, 30 + 60 * i, 30, 30, 30);
     popStyle();
