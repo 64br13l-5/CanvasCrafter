@@ -13,6 +13,7 @@ int chosen=0;
 pen p; 
 Eraser e; 
 tool t;
+Bucket b;
 int sw;
 void setup() {
   size(1000, 800);
@@ -24,6 +25,7 @@ void setup() {
   sw = 2;
   p = new pen(C,sw);
   e = new Eraser(sw);
+  b = new Bucket(C);
   t = p;
 
 }
@@ -43,6 +45,9 @@ void mouseClicked() {
   }
   else if ((mouseX > 435 && mouseX < 465) && (mouseY > 90 && mouseY < 120)) {
     t = p;
+  }
+    else if ((mouseX > 495 && mouseX < 525) && (mouseY > 90 && mouseY < 120)) {
+    t = b;
   }
   else if ((mouseX > 30 && mouseX < 60) && (mouseY > 90 && mouseY < 120)) {
     Color c;
@@ -101,8 +106,10 @@ void draw() {
   
   fill((t.equals(e)) ? #00ff00 : 255);
   square(375, 90, 30);
-   fill((t.equals(p)) ? #00ff00 : 255);
+  fill((t.equals(p)) ? #00ff00 : 255);
   square(435, 90, 30);
+  fill((t.equals(b)) ? #00ff00 : 255);
+  square(495, 90, 30);
   fill(255);
   pushStyle();
   if (millis() - time < 300)
@@ -114,6 +121,8 @@ void draw() {
   text("pen", 437, 105);
   textSize(10);
   text("eraser", 375, 105);
+  textSize(9);
+  text("bucket", 495,105);
   pushStyle();
   fill(0, 0, 255);
   textSize(42);
