@@ -1,5 +1,5 @@
 import java.util.*;
-LinkedList<canvas>layers;
+ArrayList<canvas>layers;
 import javax.swing.JColorChooser;
 import java.awt.Color;
 int sx;
@@ -15,68 +15,55 @@ tool t;
 Bucket b;
 int sw;
 void setup() {
-  //frameRate(1);
   size(1000, 800);
   background(255);
-  layers = new LinkedList<canvas>();
+  layers = new ArrayList<canvas>();
   layers.add(new canvas());
-  layers.getFirst().enable(true);
+  layers.get(0).enable(true);
   a = layers.get(0);
   sw = 2;
-  p = new pen(C,sw);
+  p = new pen(C, sw);
   e = new Eraser(sw);
   b = new Bucket(C);
   t = p;
-
 }
 void mouseClicked() {
   if ((mouseX > 30 && mouseX < 60) && (mouseY > 30 && mouseY < 60)) {
     a.paintList.clear();
+    for (canvas j : layers) j.count = 0;
     background(255);
     square(30, 30, 30);
     time = millis();
-  }
-  else if ((mouseX > 90 && mouseX < 120) && (mouseY > 90 && mouseY < 120)) {
+  } else if ((mouseX > 90 && mouseX < 120) && (mouseY > 90 && mouseY < 120)) {
     layers.add(new canvas());
-  }
-  else if ((mouseX > 150 && mouseX < 180) && (mouseY > 90 && mouseY < 120)) {
-    if(layers.size() > 1)
-    layers.removeLast();
-  }
-  else if ((mouseX > 435 && mouseX < 465) && (mouseY > 90 && mouseY < 120)) {
+  } else if ((mouseX > 150 && mouseX < 180) && (mouseY > 90 && mouseY < 120)) {
+    if (layers.size() > 1)
+      layers.remove(layers.size()-1);
+  } else if ((mouseX > 435 && mouseX < 465) && (mouseY > 90 && mouseY < 120)) {
     t = e;
-  }
-  else if ((mouseX > 495 && mouseX < 525) && (mouseY > 90 && mouseY < 120)) {
+  } else if ((mouseX > 495 && mouseX < 525) && (mouseY > 90 && mouseY < 120)) {
     t = p;
-  }
-    else if ((mouseX > 555 && mouseX < 605) && (mouseY > 90 && mouseY < 120)) {
+  } else if ((mouseX > 555 && mouseX < 605) && (mouseY > 90 && mouseY < 120)) {
     t = b;
-  }
-  else if ((mouseX > 30 && mouseX < 60) && (mouseY > 90 && mouseY < 120)) {
+  } else if ((mouseX > 30 && mouseX < 60) && (mouseY > 90 && mouseY < 120)) {
     Color c;
     c = JColorChooser.showDialog(null, "Choose a Color", Color.black);
     if (c != null) C = color(c.getRed(), c.getGreen(), c.getBlue());
     p.setC(C);
-    b.setColor(C);
-  }
-  else for (int i = 1; i <= layers.size(); i++) {
+  } else for (int i = 1; i <= layers.size(); i++) {
     if (mouseX > 30+60*i && mouseX < 60+60*i) {
       if (mouseY > 30 && mouseY < 60) {
-      background(255);
-      canvas current = layers.get(i-1);
-      boolean e = current.isEnabled();
-      current.enable(e = !e);
-      for(canvas j : layers) j.count = 0;
+        background(255);
+        canvas current = layers.get(i-1);
+        boolean e = current.isEnabled();
+        current.enable(e = !e);
+        for (canvas j : layers) j.count = 0;
+      } else if (mouseY > 5 && mouseY < 30) {
+        a = layers.get(i-1);
+      }
     }
-    else if(mouseY > 5 && mouseY < 30) {
-      a = layers.get(i-1);
-
-    }
-    }
-    
   }
 }
-
 void draw() {
   fill(190, 190, 190, 255);
   rect(0, 0, width, 120);
@@ -85,13 +72,12 @@ void draw() {
   line(215, 105, 390, 105);
   circle(cx, 105, 20);
   if ((mouseX > 200 && mouseX < 405) && mouseY > 90 && mouseY < 120 && mousePressed) {
-    sw = (int)(constrain(mouseX-215,0,175)*0.571428571);
+    sw = (int)(constrain(mouseX-215, 0, 175)*0.571428571);
     e.setSW(sw);
     p.setSW(sw);
     cx = constrain(mouseX, 215, 390);
-  } else if (mousePressed && mouseY > 120) {
-    
-    if (a.isEnabled()){   
+  } else if (mousePressed && mouseY >120) {
+    if (a.isEnabled()) {   
       a.addPaint(t.makePaint());
     }
   }
@@ -100,7 +86,6 @@ void draw() {
       for (int j = i.count; j < i.paintList.size(); j++) {
         i.paintList.get(j).drawLine();
         i.count++;
-      
       }
     }
   }
@@ -112,15 +97,13 @@ void draw() {
     if (layers.get(i-1).isEnabled())    
       stroke(color(0, 255, 0));
     fill((a == layers.get(i-1)) ? #00ccee : 255);
-    triangle(35+60*i,10,55+60*i,10,45+60*i,25);
+    triangle(35+60*i, 10, 55+60*i, 10, 45+60*i, 25);
     fill(255);
     square(30 + 60 *i, 30, 30);
-    
     fill(0);
     text("layer " + i, 30 + 60 * i, 30, 30, 30);
     popStyle();
   }
-  
   fill((t.equals(e)) ? #00ff00 : 255);
   square(435, 90, 30);
   fill((t.equals(p)) ? #00ff00 : 255);
@@ -128,8 +111,8 @@ void draw() {
   fill((t.equals(b)) ? #00ff00 : 255);
   square(555, 90, 30);
   fill(255);
-  circle(105,105,30);
-   circle(165,105,30);
+  circle(105, 105, 30);
+  circle(165, 105, 30);
   pushStyle();
   if (millis() - time < 300)
     stroke(0, 255, 0);
@@ -141,12 +124,12 @@ void draw() {
   textSize(10);
   text("eraser", 435, 105);
   textSize(9);
-  text("bucket", 555,105);
+  text("bucket", 555, 105);
   pushStyle();
   fill(0, 0, 255);
   textSize(42);
   text("+", 89, 118);
-  fill(255,0,0);
+  fill(255, 0, 0);
   textSize(50);
   text("-", 151, 120);
   popStyle();

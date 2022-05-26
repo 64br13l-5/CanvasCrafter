@@ -13,7 +13,6 @@ public class paint {
     this.bucket = bucket;
   }
   public void filltool(int x,int y){
-
     if(x > width || x<0 || y>height || y<0) return;
     loadPixels();
     color C = pixels[x+y*width];
