@@ -1,11 +1,11 @@
 public class canvas{
-  public LinkedList<paint>paintList;
+  public ArrayList<paint>paintList;
   private boolean enabled; 
   public int count; 
   public canvas(){
     count = 0;
     enabled = false; 
-    paintList = new LinkedList<paint>();
+    paintList = new ArrayList<paint>();
   }
   public boolean isEnabled(){
     return enabled;
@@ -16,7 +16,5 @@ public class canvas{
   public void addPaint(paint p){
     paintList.add(p);
   }
-  public LinkedList getPaintList(){
-    return paintList;
-  }
+  
 }

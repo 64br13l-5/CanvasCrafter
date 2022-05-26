@@ -1,5 +1,5 @@
 import java.util.*;
-LinkedList<canvas>layers;
+ArrayList<canvas>layers;
 import javax.swing.JColorChooser;
 import java.awt.Color;
 int sx;
@@ -18,9 +18,9 @@ void setup() {
   //frameRate(1);
   size(1000, 800);
   background(255);
-  layers = new LinkedList<canvas>();
+  layers = new ArrayList<canvas>();
   layers.add(new canvas());
-  layers.getFirst().enable(true);
+  layers.get(0).enable(true);
   a = layers.get(0);
   sw = 2;
   p = new pen(C,sw);
@@ -42,7 +42,7 @@ void mouseClicked() {
   }
   else if ((mouseX > 150 && mouseX < 180) && (mouseY > 90 && mouseY < 120)) {
     if(layers.size() > 1)
-    layers.removeLast();
+    layers.remove(layers.size()-1);
   }
   else if ((mouseX > 435 && mouseX < 465) && (mouseY > 90 && mouseY < 120)) {
     t = e;
@@ -99,8 +99,7 @@ void draw() {
     if (i.isEnabled()) {
       for (int j = i.count; j < i.paintList.size(); j++) {
         i.paintList.get(j).drawLine();
-        i.count++;
-      
+        i.count++;     
       }
     }
   }
