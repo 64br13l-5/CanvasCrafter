@@ -12,41 +12,70 @@ public class paint {
     strw = sw; 
     this.bucket = bucket;
   }
-  public void filltool(int x,int y){
-    if(x > width || x<0 || y>height || y<0) return;
+  public void filltool(int X,int Y){
+    float t = millis();
+    if(X > width || X<0 || Y>height || Y<0) return;
     loadPixels();
-    color C = pixels[x+y*width];
+    color C = pixels[X+Y*width];
     if(color(c) == C) return;
     Stack<TwoPoint> s = new Stack<TwoPoint>();
-    s.add(new TwoPoint(x,x,y,1));
-    s.add(new TwoPoint(x,x,y-1,-1));
+    s.add(new TwoPoint(X,X,Y,1));
+    s.add(new TwoPoint(X,X,Y-1,-1));
     while (!s.isEmpty()){
       TwoPoint p = s.pop();
-      int lx = p.x;
-      if(inside(lx,p.y,C)){
-        while(inside(lx-1,p.y,C)){
-          pixels[(lx-1)+p.y*width] = color(c);
-          lx--;
+      int x = p.x1;
+      if(inside(x,p.y,C)){
+        while(inside(x-1,p.y,C)){
+          pixels[(x-1)+p.y*width] = color(c);
+          x--;
         }
       }
-      if(lx < p.x)
-        s.add(new TwoPoint(lx,p.x-1,p.y-p.y1,-p.y1));
-      while(p.x <= p.x1){
-        while(inside(p.x,p.y,C)){
-          pixels[p.x+p.y*width] = color(c);
-          p.x++;
-          s.add(new TwoPoint(lx,p.x-1,p.y+p.y1,p.y1));
-          if(p.x-1 > p.x1)
-            s.add(new TwoPoint(p.x1+1,p.x-1,p.y-p.y1,-p.y1));
+      if(x < p.x1)
+        s.add(new TwoPoint(x,p.x1-1,p.y-p.dy,-p.dy));
+      while(p.x1 <= p.x2){
+        while(inside(p.x1,p.y,C)){
+          pixels[p.x1+p.y*width] = color(c);
+          p.x1++;
+          s.add(new TwoPoint(x,p.x1-1,p.y+p.dy,p.dy));
+          if(p.x1-1 > p.x2)
+            s.add(new TwoPoint(p.x2+1,p.x1-1,p.y-p.dy,-p.dy));
         }
-        p.x++;
-        while(p.x<p.x1 && !inside(p.x,p.y,C))
-          p.x++;
-        lx=p.x;
+        p.x1++;
+        while(p.x1<p.x2 && !inside(p.x1,p.y,C)){
+          p.x1++;
+        }
+        x=p.x1;
       }
 
       
     }
+    print(millis() -t);
+    updatePixels();
+  }
+  public void filltool2(int x,int y){
+    float t = millis();
+    if(x > width || x<0 || y>height || y<0) return;
+    loadPixels();
+    color C = pixels[x+y*width];
+    if(color(c) == C) return;
+    Stack<Point> s = new Stack<Point>();
+    s.add(new Point(x,y));
+    while (!s.isEmpty()){
+      Point p = s.pop();
+      int lx = p.x;
+      while(inside(lx-1,p.y,C)){
+        pixels[(lx-1)+p.y*width] = color(c);
+        lx--;
+      }
+      while(inside(p.x,p.y,C)){
+        pixels[p.x+p.y*width] = color(c);
+        p.x++;
+      }
+      scan(lx,p.x-1,p.y+1,C,s);
+      scan(lx,p.x-1,p.y-1,C,s);
+      
+    }
+    print(millis()-t);
     updatePixels();
   }
   boolean inside(int x, int y, color c){
@@ -66,7 +95,7 @@ public class paint {
   }
   public void drawLine() {
     if (bucket == true) {
-      filltool(x,y);
+      filltool2(x,y);
     } else {
       pushStyle();
       stroke(c);
@@ -85,14 +114,14 @@ class Point{
   }
 }
 class TwoPoint{
-  public int x;
   public int x1;
-  public int y1;
+  public int x2;
   public int y;
+  public int dy;
   public TwoPoint(int x,int x1,int y, int y1){
-    this.x = x; 
+    this.x1 = x; 
     this.y = y; 
-    this.x1 = x1; 
-    this.y1 = y1; 
+    this.x2 = x1; 
+    this.dy = y1; 
   }
 }
