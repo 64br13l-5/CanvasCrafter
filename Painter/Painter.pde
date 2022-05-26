@@ -88,7 +88,7 @@ void draw() {
     e.setSW(sw);
     p.setSW(sw);
     cx = constrain(mouseX, 215, 390);
-  } else if (mousePressed) {
+  } else if (mousePressed && mouseY >120) {
     
     if (a.isEnabled()){   
       a.addPaint(t.makePaint());
