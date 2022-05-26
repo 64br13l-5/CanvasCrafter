@@ -17,21 +17,34 @@ public class paint {
     loadPixels();
     color C = pixels[x+y*width];
     if(color(c) == C) return;
-    Stack<Point> s = new Stack<Point>();
-    s.add(new Point(x,y));
+    Stack<TwoPoint> s = new Stack<TwoPoint>();
+    s.add(new TwoPoint(x,x,y,1));
+    s.add(new TwoPoint(x,x,y-1,-1));
     while (!s.isEmpty()){
-      Point p = s.pop();
+      TwoPoint p = s.pop();
       int lx = p.x;
-      while(inside(lx-1,p.y,C)){
-        pixels[(lx-1)+p.y*width] = color(c);
-        lx--;
+      if(inside(lx,p.y,C)){
+        while(inside(lx-1,p.y,C)){
+          pixels[(lx-1)+p.y*width] = color(c);
+          lx--;
+        }
       }
-      while(inside(p.x,p.y,C)){
-        pixels[p.x+p.y*width] = color(c);
+      if(lx < p.x)
+        s.add(new TwoPoint(lx,p.x-1,p.y-p.y1,-p.y1));
+      while(p.x <= p.x1){
+        while(inside(p.x,p.y,C)){
+          pixels[p.x+p.y*width] = color(c);
+          p.x++;
+          s.add(new TwoPoint(lx,p.x-1,p.y+p.y1,p.y1));
+          if(p.x-1 > p.x1)
+            s.add(new TwoPoint(p.x1+1,p.x-1,p.y-p.y1,-p.y1));
+        }
         p.x++;
+        while(p.x<p.x1 && !inside(p.x,p.y,C))
+          p.x++;
+        lx=p.x;
       }
-      scan(lx,p.x-1,p.y+1,C,s);
-      scan(lx,p.x-1,p.y-1,C,s);
+
       
     }
     updatePixels();

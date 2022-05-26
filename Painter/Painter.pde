@@ -50,6 +50,7 @@ void mouseClicked() {
     c = JColorChooser.showDialog(null, "Choose a Color", Color.black);
     if (c != null) C = color(c.getRed(), c.getGreen(), c.getBlue());
     p.setC(C);
+    b.setColor(C);
   } else for (int i = 1; i <= layers.size(); i++) {
     if (mouseX > 30+60*i && mouseX < 60+60*i) {
       if (mouseY > 30 && mouseY < 60) {
