@@ -57,6 +57,7 @@ void mouseClicked() {
     c = JColorChooser.showDialog(null, "Choose a Color", Color.black);
     if (c != null) C = color(c.getRed(), c.getGreen(), c.getBlue());
     p.setC(C);
+    b.setColor(C);
   }
   else for (int i = 1; i <= layers.size(); i++) {
     if (mouseX > 30+60*i && mouseX < 60+60*i) {
@@ -88,7 +89,7 @@ void draw() {
     e.setSW(sw);
     p.setSW(sw);
     cx = constrain(mouseX, 215, 390);
-  } else if (mousePressed) {
+  } else if (mousePressed && mouseY > 120) {
     
     if (a.isEnabled()){   
       a.addPaint(t.makePaint());

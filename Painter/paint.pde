@@ -13,15 +13,15 @@ public class paint {
     this.bucket = bucket;
   }
   public void filltool(int x,int y){
-   
+
     if(x > width || x<0 || y>height || y<0) return;
     loadPixels();
     color C = pixels[x+y*width];
     if(color(c) == C) return;
-    ArrayDeque<Point> s = new ArrayDeque<Point>();
+    Stack<Point> s = new Stack<Point>();
     s.add(new Point(x,y));
     while (!s.isEmpty()){
-      Point p = s.removeFirst();
+      Point p = s.pop();
       int lx = p.x;
       while(inside(lx-1,p.y,C)){
         pixels[(lx-1)+p.y*width] = color(c);
@@ -41,7 +41,7 @@ public class paint {
     if(x >= width || x<0 || y>=height || y<0) return false;
     return pixels[x+y*width] == c;
   }
-  void scan(int lx,int rx, int y,color C, ArrayDeque<Point> s){
+  void scan(int lx,int rx, int y,color C, Stack<Point> s){
     boolean added = false;
     for(int x  = lx+1; x < rx; x++){
       if(!inside(x,y,C))
