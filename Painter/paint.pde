@@ -71,3 +71,15 @@ class Point{
     this.y = y; 
   }
 }
+class TwoPoint{
+  public int x;
+  public int x1;
+  public int y1;
+  public int y;
+  public TwoPoint(int x,int x1,int y, int y1){
+    this.x = x; 
+    this.y = y; 
+    this.x1 = x1; 
+    this.y1 = y1; 
+  }
+}
