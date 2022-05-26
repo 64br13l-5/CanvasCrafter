@@ -16,5 +16,5 @@ public class canvas{
   public void addPaint(paint p){
     paintList.add(p);
   }
-  
+
 }
