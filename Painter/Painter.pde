@@ -32,6 +32,7 @@ void setup() {
 void mouseClicked() {
   if ((mouseX > 30 && mouseX < 60) && (mouseY > 30 && mouseY < 60)) {
     a.paintList.clear();
+    a.count = 0;
     background(255);
     square(30, 30, 30);
     time = millis();
