@@ -3,6 +3,7 @@ public class canvas{
   private boolean enabled; 
   public int count; 
   public canvas(){
+    count = 0;
     enabled = false; 
     paintList = new LinkedList<paint>();
   }

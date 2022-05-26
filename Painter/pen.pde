@@ -6,7 +6,7 @@ public class pen extends tool{
     sw = str;
   }
   public paint makePaint() {
-    return new paint(mouseX, mouseY, sx, sy, c, sw);
+    return new paint(mouseX, mouseY, sx, sy, c, sw,false);
   }
   public void setSW(int sw) {
     this.sw = sw;
