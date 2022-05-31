@@ -1,4 +1,5 @@
 public class canvas{
+  public PGraphics pg;
   public ArrayList<paint>paintList;
   private boolean enabled; 
   public int count; 
@@ -6,6 +7,7 @@ public class canvas{
     count = 0;
     enabled = false; 
     paintList = new ArrayList<paint>();
+    pg = createGraphics(width,height);
   }
   public boolean isEnabled(){
     return enabled;
