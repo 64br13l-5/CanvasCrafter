@@ -79,7 +79,7 @@ void draw() {
     e.setSW(sw);
     p.setSW(sw);
     cx = constrain(mouseX, 215, 390);
-  } else if (mousePressed && mouseY >120) {
+  } else if (mousePressed && mouseY >120 ) {
     if (a.isEnabled()) {   
       a.addPaint(t.makePaint());
     }
@@ -89,7 +89,6 @@ void draw() {
       for (int j = i.count; j < i.paintList.size(); j++) {
         i.paintList.get(j).drawLine(i);
         i.count++;
-        println(j);
       }
       image(i.pg, 0, 0);
 
