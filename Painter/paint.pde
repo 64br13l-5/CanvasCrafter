@@ -93,15 +93,17 @@ public class paint {
       }
     }
   }
-  public void drawLine() {
+  public void drawLine(canvas cv) {
     if (bucket == true) {
       filltool2(x,y);
     } else {
-      pushStyle();
-      stroke(c);
-      strokeWeight(strw);
-      line(x, constrain(y, 120, height), xstart, constrain(ystart, 120, height));
-      popStyle();
+      cv.pg.beginDraw();
+      cv.pg.pushStyle();
+      cv.pg.stroke(c);
+      cv.pg.strokeWeight(strw);
+      cv.pg.line(x, constrain(y, 120, height), xstart, constrain(ystart, 120, height));
+      cv.pg.popStyle();
+      cv.pg.endDraw();
     }
   }
 }

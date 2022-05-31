@@ -29,8 +29,11 @@ void setup() {
 }
 void mouseClicked() {
   if ((mouseX > 30 && mouseX < 60) && (mouseY > 30 && mouseY < 60)) {
-    a.paintList.clear();
-    for (canvas j : layers) j.count = 0;
+    a.paintList.clear();    
+    a.count = 0;
+    a.pg.beginDraw(); 
+    a.pg.clear();
+    a.pg.endDraw();
     background(255);
     square(30, 30, 30);
     time = millis();
@@ -58,7 +61,6 @@ void mouseClicked() {
         canvas current = layers.get(i-1);
         boolean e = current.isEnabled();
         current.enable(e = !e);
-        for (canvas j : layers) j.count = 0;
       } else if (mouseY > 5 && mouseY < 30) {
         a = layers.get(i-1);
       }
@@ -85,9 +87,12 @@ void draw() {
   for (canvas i : layers) {
     if (i.isEnabled()) {
       for (int j = i.count; j < i.paintList.size(); j++) {
-        i.paintList.get(j).drawLine();
+        i.paintList.get(j).drawLine(i);
         i.count++;
+        println(j);
       }
+      image(i.pg, 0, 0);
+
     }
   }
   sx = mouseX;
