@@ -17,6 +17,7 @@ int sw;
 void setup() {
   size(1000, 800);
   background(255);
+  noSmooth();
   layers = new ArrayList<canvas>();
   layers.add(new canvas());
   layers.get(0).enable(true);
@@ -48,7 +49,7 @@ void mouseClicked() {
   } else if ((mouseX > 30 && mouseX < 60) && (mouseY > 90 && mouseY < 120)) {
     Color c;
     c = JColorChooser.showDialog(null, "Choose a Color", Color.black);
-    if (c != null) C = color(c.getRed(), c.getGreen(), c.getBlue());
+    if (c != null) C = color(c.getRed(), c.getGreen(), c.getBlue(),c.getAlpha());
     p.setC(C);
   } else for (int i = 1; i <= layers.size(); i++) {
     if (mouseX > 30+60*i && mouseX < 60+60*i) {
