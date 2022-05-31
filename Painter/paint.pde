@@ -59,24 +59,23 @@ public class paint {
     
     if(x > width || x<0 || y>height || y<120) return;
     cv.pg.loadPixels();
-    int[] px = cv.pg.pixels;
-    color C = px[x+y*width];
+    color C = cv.pg.pixels[x+y*width];
     if(color(c) == C) return;
     Stack<Point> s = new Stack<Point>();
     s.add(new Point(x,y));
     while (!s.isEmpty()){
       Point p = s.pop();
       int lx = p.x;
-      while(inside(lx-1,p.y,C,px)){
-        px[(lx-1)+p.y*width] = color(c);
+      while(inside(lx-1,p.y,C,cv.pg.pixels)){
+        cv.pg.pixels[(lx-1)+p.y*width] = color(c);
         lx--;
       }
-      while(inside(p.x,p.y,C,px)){
-        px[p.x+p.y*width] = color(c);
+      while(inside(p.x,p.y,C,cv.pg.pixels)){
+        cv.pg.pixels[p.x+p.y*width] = color(c);
         p.x++;
       }
-      scan(lx,p.x-1,p.y+1,C,s,px);
-      scan(lx,p.x-1,p.y-1,C,s,px);
+      scan(lx,p.x-1,p.y+1,C,s,cv.pg.pixels);
+      scan(lx,p.x-1,p.y-1,C,s,cv.pg.pixels);
       
     }
     print(millis()-t);
@@ -100,17 +99,14 @@ public class paint {
   public void drawLine(canvas cv) {
     if (bucket) {
       filltool2(x,y,cv);
-    }else if (eraser){
-      cv.pg.loadPixels();
-      
-      cv.pg.pixels[x+y*width] = color(#FFFFFF);
-      cv.pg.updatePixels();
     }
     else {
       cv.pg.beginDraw();
       cv.pg.pushStyle();
-      cv.pg.stroke(c);
+      if(eraser)     cv.pg.stroke(c,0);
+      else cv.pg.stroke(c);
       cv.pg.strokeWeight(strw);
+      cv.pg.blendMode(REPLACE);
       cv.pg.line(x, constrain(y, 120, height), xstart, constrain(ystart, 120, height));
       cv.pg.popStyle();
       cv.pg.endDraw();
