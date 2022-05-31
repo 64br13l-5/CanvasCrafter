@@ -2,8 +2,9 @@ public class paint {
   private int x, y, xstart, ystart, strw;
   private color c;
   private boolean bucket;
+  private boolean eraser;
   
-  public paint(int X, int Y, int xs, int ys, color col, int sw, boolean bucket) {
+  public paint(int X, int Y, int xs, int ys, color col, int sw, boolean bucket,boolean eraser) {
     x = X;
     y = Y;
     xstart = xs;
@@ -11,6 +12,7 @@ public class paint {
     c = col;
     strw = sw; 
     this.bucket = bucket;
+    this.eraser = eraser;
   }
   //public void filltool(int X,int Y){
   //  float t = millis();
@@ -96,9 +98,15 @@ public class paint {
     }
   }
   public void drawLine(canvas cv) {
-    if (bucket == true) {
+    if (bucket) {
       filltool2(x,y,cv);
-    } else {
+    }else if (eraser){
+      cv.pg.loadPixels();
+      
+      cv.pg.pixels[x+y*width] = color(#FFFFFF);
+      cv.pg.updatePixels();
+    }
+    else {
       cv.pg.beginDraw();
       cv.pg.pushStyle();
       cv.pg.stroke(c);
