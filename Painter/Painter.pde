@@ -39,8 +39,8 @@ void mouseClicked() {
     time = millis();
   } else if ((mouseX > 90 && mouseX < 120) && (mouseY > 90 && mouseY < 120)) {
     layers.add(new canvas());
-  } else if ((mouseX > 615 && mouseX < 645) && (mouseY > 90 && mouseY < 110)) {
-    a.pg.save("image.jpg");
+  } else if ((mouseX > 615 && mouseX < 645) && (mouseY > 110 && mouseY < 120)) {
+    selectFolder("Select a folder to process:", "folderSelected");
   } else if ((mouseX > 150 && mouseX < 180) && (mouseY > 90 && mouseY < 120)) {
     if (layers.size() > 1)
       layers.remove(layers.size()-1);
@@ -161,4 +161,13 @@ void draw() {
   square(30, 90, 30);
   // pop();
   //circle(95, 45, 20);
+}
+void folderSelected(File selection) {
+  if (selection == null) {
+    println("Window was closed or the user hit cancel.");
+  } else {
+    println("saved to " + selection.getAbsolutePath());
+    PImage temp = get(0, 120, width, height-120);
+    temp.save(selection.getAbsolutePath() + "\\image.jpg");
+  }
 }
