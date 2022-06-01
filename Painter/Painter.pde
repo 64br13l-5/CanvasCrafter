@@ -96,6 +96,13 @@ void draw() {
   }
   sx = mouseX;
   sy = mouseY;
+  if(t == e){
+    strokeWeight(1);
+    stroke(0);
+    noFill();
+    circle(mouseX,mouseY,e.sw);
+    println(sw);
+  }
   for (int i = 1; i <= layers.size(); i++) {
     strokeWeight(1);
     pushStyle();
