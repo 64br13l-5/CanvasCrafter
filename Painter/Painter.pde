@@ -38,6 +38,8 @@ void mouseClicked() {
     time = millis();
   } else if ((mouseX > 90 && mouseX < 120) && (mouseY > 90 && mouseY < 120)) {
     layers.add(new canvas());
+  } else if ((mouseX > 615 && mouseX < 645) && (mouseY > 90 && mouseY < 110)) {
+    a.pg.save("image.jpg");
   } else if ((mouseX > 150 && mouseX < 180) && (mouseY > 90 && mouseY < 120)) {
     if (layers.size() > 1)
       layers.remove(layers.size()-1);
@@ -144,8 +146,8 @@ void draw() {
   text("eraser", 435, 105);
   textSize(9);
   text("bucket", 555, 105);
-  text("bucket", 615, 105);
-  text("bucket", 615, 105);
+  text("import", 615, 99);
+  text("export", 615, 119);
   pushStyle();
   fill(0, 0, 255);
   textSize(42);
