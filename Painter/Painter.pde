@@ -67,12 +67,17 @@ void mouseClicked() {
 }
 void draw() {
   background(255);
+  if(t!=b && mouseY > 120){
     pushStyle();
+    noCursor();
     strokeWeight(1);
     stroke(0);
     fill(C,t==e ? 0 : 255);
     circle(mouseX,mouseY,sw);
  popStyle();
+  }
+  else
+    cursor();
   fill(190, 190, 190, 255);
   rect(0, 0, width, 120);
   fill(255);
@@ -123,6 +128,8 @@ void draw() {
   fill((t.equals(b)) ? #00ff00 : 255);
   square(555, 90, 30);
   fill(255);
+  rect(615,90,30,10);
+  rect(615,110,30,10);
   circle(105, 105, 30);
   circle(165, 105, 30);
   pushStyle();
@@ -137,6 +144,8 @@ void draw() {
   text("eraser", 435, 105);
   textSize(9);
   text("bucket", 555, 105);
+  text("bucket", 615, 105);
+  text("bucket", 615, 105);
   pushStyle();
   fill(0, 0, 255);
   textSize(42);
