@@ -30,9 +30,11 @@ void setup() {
 }
 void mouseClicked() {
   if ((mouseX > 30 && mouseX < 60) && (mouseY > 30 && mouseY < 60)) {
-    a.paintList.clear();
-    for (canvas j : layers) j.count = 0;
-    background(255);
+    a.paintList.clear();    
+    a.count = 0;
+    a.pg.beginDraw(); 
+    a.pg.clear();
+    a.pg.endDraw();
     square(30, 30, 30);
     time = millis();
   } else if ((mouseX > 90 && mouseX < 120) && (mouseY > 90 && mouseY < 120)) {
@@ -51,14 +53,13 @@ void mouseClicked() {
     c = JColorChooser.showDialog(null, "Choose a Color", Color.black);
     if (c != null) C = color(c.getRed(), c.getGreen(), c.getBlue(),c.getAlpha());
     p.setC(C);
+    b.setColor(C);
   } else for (int i = 1; i <= layers.size(); i++) {
     if (mouseX > 30+60*i && mouseX < 60+60*i) {
       if (mouseY > 30 && mouseY < 60) {
-        background(255);
         canvas current = layers.get(i-1);
         boolean e = current.isEnabled();
         current.enable(e = !e);
-        for (canvas j : layers) j.count = 0;
       } else if (mouseY > 5 && mouseY < 30) {
         a = layers.get(i-1);
       }
@@ -66,6 +67,7 @@ void mouseClicked() {
   }
 }
 void draw() {
+  background(255);
   fill(190, 190, 190, 255);
   rect(0, 0, width, 120);
   fill(255);
@@ -77,7 +79,7 @@ void draw() {
     e.setSW(sw);
     p.setSW(sw);
     cx = constrain(mouseX, 215, 390);
-  } else if (mousePressed && mouseY >120) {
+  } else if (mousePressed && mouseY >120 ) {
     if (a.isEnabled()) {   
       a.addPaint(t.makePaint());
     }
@@ -85,9 +87,12 @@ void draw() {
   for (canvas i : layers) {
     if (i.isEnabled()) {
       for (int j = i.count; j < i.paintList.size(); j++) {
-        i.paintList.get(j).drawLine();
+        i.paintList.get(j).drawLine(i);
         i.count++;
       }
+          image(i.pg, 0, 0);
+
+
     }
   }
   sx = mouseX;
