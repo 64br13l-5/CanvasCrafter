@@ -16,3 +16,14 @@ Final project for Mr. K's class, Gabriel Small and Alisa Aleksandrova
 WorkLog:
 5/23/22
 Alisa: tweaked the way the tools class works, added a slider for strokewidth
+5/24/22
+Alisa: add buttons for pen and eraser and work on ctrl z
+5/25/22
+Alisa: continue working on undo and redo so that pressing ctrl and z at the same time will call the undo
+5/26/22
+Alisa: work on the eraser tool (attempt to implement it so that it deletes the paint objects instead of drawing in white)
+5/27/22
+Alisa: finalize/fix undo and redo and continue working on the eraser
+5/30/22
+Alisa: attempted to add a hashmap of paints to use for the eraser but did not push this because it proved to be fruitless. also tried to use Color to make transparency
+
