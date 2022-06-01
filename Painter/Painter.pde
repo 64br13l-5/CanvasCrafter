@@ -17,6 +17,7 @@ int sw;
 void setup() {
   size(1000, 800);
   background(255);
+  noSmooth();
   layers = new ArrayList<canvas>();
   layers.add(new canvas());
   layers.get(0).enable(true);
