@@ -2,6 +2,8 @@ import java.util.*;
 ArrayList<canvas>layers;
 import javax.swing.JColorChooser;
 import java.awt.Color;
+import java.util.*;
+Controller keyboardInput;
 int sx;
 //int toolType;
 int time;
@@ -51,7 +53,7 @@ void mouseClicked() {
   } else if ((mouseX > 30 && mouseX < 60) && (mouseY > 90 && mouseY < 120)) {
     Color c;
     c = JColorChooser.showDialog(null, "Choose a Color", Color.black);
-    if (c != null) C = color(c.getRed(), c.getGreen(), c.getBlue(),c.getAlpha());
+    if (c != null) C = color(c.getRed(), c.getGreen(), c.getBlue(), c.getAlpha());
     p.setC(C);
     b.setColor(C);
   } else for (int i = 1; i <= layers.size(); i++) {
@@ -66,20 +68,32 @@ void mouseClicked() {
     }
   }
 }
+
+void keyReleased() {
+  keyboardInput.release(keyCode);
+}
+void keyPressed() {
+  keyboardInput.press(keyCode);
+}
+
 void draw() {
+  
+  //drawing stuff
   background(255);
-    pushStyle();
-    strokeWeight(1);
-    stroke(0);
-    fill(C,t==e ? 0 : 255);
-    circle(mouseX,mouseY,sw);
- popStyle();
+  pushStyle();
+  strokeWeight(1);
+  stroke(0);
+  fill(C, t==e ? 0 : 255);
+  circle(mouseX, mouseY, sw);
+  popStyle();
   fill(190, 190, 190, 255);
   rect(0, 0, width, 120);
   fill(255);
   rect(200, 90, 205, 30);
   line(215, 105, 390, 105);
   circle(cx, 105, 20);
+  
+  //slider + drawing
   if ((mouseX > 200 && mouseX < 405) && mouseY > 90 && mouseY < 120 && mousePressed) {
     sw = (int)(constrain(mouseX-215, 0, 175)*0.571428571);
     e.setSW(sw);
@@ -90,20 +104,21 @@ void draw() {
       a.addPaint(t.makePaint());
     }
   }
+  
+  //drawing each paint
   for (canvas i : layers) {
     if (i.isEnabled()) {
       for (int j = i.count; j < i.paintList.size(); j++) {
         i.paintList.get(j).drawLine(i);
         i.count++;
       }
-          image(i.pg, 0, 0);
-
-
+      image(i.pg, 0, 0);
     }
   }
   sx = mouseX;
   sy = mouseY;
-
+  
+  //draw the layer buttons
   for (int i = 1; i <= layers.size(); i++) {
     strokeWeight(1);
     pushStyle();
@@ -150,4 +165,57 @@ void draw() {
   square(30, 90, 30);
   // pop();
   //circle(95, 45, 20);
+
+  //CTRL Z AND Y STUFF 
+  //if (keyboardInput.isPressed(Controller.P1_LEFT ) && keyboardInput.isPressed(Controller.P1_RIGHT)) {
+
+  //  if(a.count2 < a.paintList.size()){
+  //  a.count2++;
+  //  }
+  //  a.count = 0;
+  //  background(255);
+
+
+
+  //}
+
+  //  //check if the button P1_RIGHT is being pressed:
+  //  if (keyboardInput.isPressed(Controller.P1_LEFT) && keyboardInput.isPressed(Controller.P1Y)) {
+  //      if(a.count2 > 0 )
+  //  a.count2--;
+}
+}
+
+class Controller {
+  static final int P1_LEFT = 0;
+  static final int P1_RIGHT = 1;
+  static final int P1Y = 2;
+  boolean [] inputs;
+
+  public Controller() {
+    inputs = new boolean[3];//2 valid buttons
+  }
+
+  /**@param code: a valid constant e.g. P1_LEFT
+   */
+  boolean isPressed(int code) {
+    return inputs[code];
+  }
+
+  void press(int code) {
+    if (code == 17)
+      inputs[P1_LEFT] = true;
+    if (code == 'Z')
+      inputs[P1_RIGHT] = true;
+    if (code == 'Y')
+      inputs[P1Y] = true;
+  }
+  void release(int code) {
+    if (code == 17)
+      inputs[P1_LEFT] = false;
+    if (code == 'Z')
+      inputs[P1_RIGHT] = false;
+    if (code == 'Y')
+      inputs[P1Y] = false;
+  }
 }
