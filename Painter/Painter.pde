@@ -77,7 +77,13 @@ void keyReleased() {
 void keyPressed() {
   keyboardInput.press(keyCode);
   if (key == 'p') {
-    
+    t = p;
+  }
+  if (key == 'e') {
+    t = e;
+  }
+  if (key == 'b') {
+    t = b;
   }
 }
 
@@ -106,13 +112,15 @@ void draw() {
     cx = constrain(mouseX, 215, 390);
   } else if (mousePressed && mouseY >120 ) {
     if (a.isEnabled()) {   
-      a.addPaint(t.makePaint());
       if (a.count2 > 0) {
         while (a.count2 > 0) {
           a.count2--;
+          if (a.paintList.size() > 0) {
           a.paintList.remove(a.paintList.size() - 1);
+          }
         }
       }
+      a.addPaint(t.makePaint());
     }
   }
   
@@ -184,8 +192,8 @@ void draw() {
     if(a.count2 < a.paintList.size()){
     a.count2++;
     }
-    a.pg.clear();
     a.count = 0;
+    a.pg.clear();
   }
 
     //check if the button P1_RIGHT is being pressed:
