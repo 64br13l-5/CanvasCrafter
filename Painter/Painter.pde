@@ -11,9 +11,11 @@ color C = 0;
 int cx = (215);
 pen p; 
 Eraser e; 
+tool d; 
 tool t;
 Bucket b;
 int sw;
+
 void setup() {
   size(1000, 800);
   background(255);
@@ -26,6 +28,7 @@ void setup() {
   p = new pen(C, sw);
   e = new Eraser(sw);
   b = new Bucket(C);
+  d = new tool();
   t = p;
 }
 void mouseClicked() {
@@ -39,11 +42,11 @@ void mouseClicked() {
     time = millis();
   } else if ((mouseX > 90 && mouseX < 120) && (mouseY > 90 && mouseY < 120)) {
     layers.add(new canvas());
-  }  else if ((mouseX > 615 && mouseX < 645) && (mouseY > 90 && mouseY < 100)) {
+  }  else if ((mouseX > 675 && mouseX < 705) && (mouseY > 90 && mouseY < 100)) {
     selectInput("Select a folder to process:", "inputSelected");
     
 
-  } else if ((mouseX > 615 && mouseX < 645) && (mouseY > 110 && mouseY < 120)) {
+  } else if ((mouseX > 675 && mouseX < 705) && (mouseY > 110 && mouseY < 120)) {
     selectFolder("Select a folder to process:", "folderSelected");
     
   } else if ((mouseX > 150 && mouseX < 180) && (mouseY > 90 && mouseY < 120)) {
@@ -55,6 +58,8 @@ void mouseClicked() {
     t = p;
   } else if ((mouseX > 555 && mouseX < 605) && (mouseY > 90 && mouseY < 120)) {
     t = b;
+  }else if ((mouseX > 615 && mouseX < 645) && (mouseY > 90 && mouseY < 120)) {
+    t = d;
   } else if ((mouseX > 30 && mouseX < 60) && (mouseY > 90 && mouseY < 120)) {
     Color c;
     c = JColorChooser.showDialog(null, "Choose a Color", Color.black);
@@ -98,7 +103,12 @@ void draw() {
     p.setSW(sw);
     cx = constrain(mouseX, 215, 390);
   } else if (mousePressed && mouseY >120 ) {
-    if (a.isEnabled()) {   
+    if(t.equals(d)){
+      C = a.pg.get(mouseX,mouseY);
+      p.setC(C);
+      b.setColor(C);
+    }
+    else if (a.isEnabled()) {   
       a.addPaint(t.makePaint());
     }
   }
@@ -135,9 +145,11 @@ void draw() {
   square(495, 90, 30);
   fill((t.equals(b)) ? #00ff00 : 255);
   square(555, 90, 30);
+  fill((t.equals(d))? #00ff00 : 255);
+  square(615, 90, 30);
   fill(255);
-  rect(615,90,30,10);
-  rect(615,110,30,10);
+  rect(675,90,30,10);
+  rect(675,110,30,10);
   circle(105, 105, 30);
   circle(165, 105, 30);
   pushStyle();
@@ -152,8 +164,11 @@ void draw() {
   text("eraser", 435, 105);
   textSize(9);
   text("bucket", 555, 105);
-  text("import", 615, 99);
-  text("export", 615, 119);
+  text("import", 675, 99);
+  text("export", 675, 119);
+  textSize(8);
+    text("dropper", 615, 105);
+
   pushStyle();
   fill(0, 0, 255);
   textSize(42);
