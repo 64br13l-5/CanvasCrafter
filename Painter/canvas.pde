@@ -3,8 +3,10 @@ public class canvas{
   public ArrayList<paint>paintList;
   private boolean enabled; 
   public int count; 
+  public int count2;
   public canvas(){
     count = 0;
+    count2 = 0;
     enabled = false; 
     paintList = new ArrayList<paint>();
     pg = createGraphics(width,height);

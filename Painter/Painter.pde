@@ -3,6 +3,7 @@ ArrayList<canvas>layers;
 import javax.swing.JColorChooser;
 import java.awt.Color;
 import java.util.*;
+public PGraphics pg;
 Controller keyboardInput;
 int sx;
 //int toolType;
@@ -18,6 +19,7 @@ Bucket b;
 int sw;
 void setup() {
   size(1000, 800);
+  keyboardInput = new Controller();
   background(255);
   noSmooth();
   layers = new ArrayList<canvas>();
@@ -74,6 +76,9 @@ void keyReleased() {
 }
 void keyPressed() {
   keyboardInput.press(keyCode);
+  if (key == 'p') {
+    
+  }
 }
 
 void draw() {
@@ -102,13 +107,20 @@ void draw() {
   } else if (mousePressed && mouseY >120 ) {
     if (a.isEnabled()) {   
       a.addPaint(t.makePaint());
+      if (a.count2 > 0) {
+        while (a.count2 > 0) {
+          a.count2--;
+          a.paintList.remove(a.paintList.size() - 1);
+        }
+      }
     }
   }
   
   //drawing each paint
+  
   for (canvas i : layers) {
     if (i.isEnabled()) {
-      for (int j = i.count; j < i.paintList.size(); j++) {
+      for (int j = i.count; j < i.paintList.size() - i.count2; j++) {
         i.paintList.get(j).drawLine(i);
         i.count++;
       }
@@ -167,22 +179,19 @@ void draw() {
   //circle(95, 45, 20);
 
   //CTRL Z AND Y STUFF 
-  //if (keyboardInput.isPressed(Controller.P1_LEFT ) && keyboardInput.isPressed(Controller.P1_RIGHT)) {
+  if (keyboardInput.isPressed(Controller.P1_LEFT ) && keyboardInput.isPressed(Controller.P1_RIGHT)) {
 
-  //  if(a.count2 < a.paintList.size()){
-  //  a.count2++;
-  //  }
-  //  a.count = 0;
-  //  background(255);
+    if(a.count2 < a.paintList.size()){
+    a.count2++;
+    }
+    a.pg.clear();
+    a.count = 0;
+  }
 
-
-
-  //}
-
-  //  //check if the button P1_RIGHT is being pressed:
-  //  if (keyboardInput.isPressed(Controller.P1_LEFT) && keyboardInput.isPressed(Controller.P1Y)) {
-  //      if(a.count2 > 0 )
-  //  a.count2--;
+    //check if the button P1_RIGHT is being pressed:
+    if (keyboardInput.isPressed(Controller.P1_LEFT) && keyboardInput.isPressed(Controller.P1Y)) {
+        if(a.count2 > 0 )
+    a.count2--;
 }
 }
 
