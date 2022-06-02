@@ -80,7 +80,7 @@ void mouseClicked() {
 }
 void draw() {
   background(255);
-  if(t!=b && mouseY > 120){
+  if(t!=b && t !=d && mouseY > 120){
     pushStyle();
     noCursor();
     strokeWeight(1);
@@ -104,9 +104,12 @@ void draw() {
     cx = constrain(mouseX, 215, 390);
   } else if (mousePressed && mouseY >120 ) {
     if(t.equals(d)){
-      C = a.pg.get(mouseX,mouseY);
+     
+      if(a.pg.pixels[mouseX +mouseY*width] != 0) {
+        C = a.pg.pixels[mouseX +mouseY*width];
       p.setC(C);
       b.setColor(C);
+      }
     }
     else if (a.isEnabled()) {   
       a.addPaint(t.makePaint());
