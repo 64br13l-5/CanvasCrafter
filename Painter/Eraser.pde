@@ -5,7 +5,7 @@ public class Eraser extends tool{
     
   }
   public paint makePaint() {
-    return new paint(mouseX, mouseY, sx, sy, 0, sw,false,true);
+    return new paint(mouseX, mouseY, sx, sy, 0, sw,false,true, false);
   }
    public void setSW(int sw) {
     this.sw = sw;

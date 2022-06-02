@@ -16,6 +16,7 @@ pen p;
 Eraser e; 
 tool t;
 Bucket b;
+Brush w;
 int sw;
 void setup() {
   size(1000, 800);
@@ -30,6 +31,7 @@ void setup() {
   p = new pen(C, sw);
   e = new Eraser(sw);
   b = new Bucket(C);
+  w = new Brush(C, sw);
   t = p;
 }
 void mouseClicked() {
@@ -58,6 +60,7 @@ void mouseClicked() {
     if (c != null) C = color(c.getRed(), c.getGreen(), c.getBlue(), c.getAlpha());
     p.setC(C);
     b.setColor(C);
+    w.setColor(C);
   } else for (int i = 1; i <= layers.size(); i++) {
     if (mouseX > 30+60*i && mouseX < 60+60*i) {
       if (mouseY > 30 && mouseY < 60) {
@@ -85,6 +88,9 @@ void keyPressed() {
   if (key == 'b') {
     t = b;
   }
+  if (key == 'w') {
+    t = w;
+  }
 }
 
 void draw() {
@@ -109,6 +115,7 @@ void draw() {
     sw = (int)(constrain(mouseX-215, 0, 175)*0.571428571);
     e.setSW(sw);
     p.setSW(sw);
+    w.setSW(sw);
     cx = constrain(mouseX, 215, 390);
   } else if (mousePressed && mouseY >120 ) {
     if (a.isEnabled()) {   

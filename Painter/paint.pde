@@ -3,8 +3,9 @@ public class paint {
   private color c;
   private boolean bucket;
   private boolean eraser;
+  private boolean brush;
   
-  public paint(int X, int Y, int xs, int ys, color col, int sw, boolean bucket,boolean eraser) {
+  public paint(int X, int Y, int xs, int ys, color col, int sw, boolean bucket,boolean eraser, boolean brush) {
     x = X;
     y = Y;
     xstart = xs;
@@ -13,6 +14,7 @@ public class paint {
     strw = sw; 
     this.bucket = bucket;
     this.eraser = eraser;
+    this.brush = brush;
   }
   //public void filltool(int X,int Y){
   //  float t = millis();
@@ -106,7 +108,8 @@ public class paint {
       if(eraser)     cv.pg.stroke(c,0);
       else cv.pg.stroke(c);
       cv.pg.strokeWeight(strw);
-      cv.pg.blendMode(REPLACE);
+      if(brush)  cv.pg.blendMode(BLEND);
+      else cv.pg.blendMode(REPLACE);
       cv.pg.line(x, constrain(y, 120, height), xstart, constrain(ystart, 120, height));
       cv.pg.popStyle();
       cv.pg.endDraw();
