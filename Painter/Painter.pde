@@ -117,11 +117,14 @@ void draw() {
   }
   for (canvas i : layers) {
     if (i.isEnabled()) {
+     if(i.getClass().getName() == "Painter$Image"){
+       i.renderImage();
+     }
       for (int j = i.count; j < i.paintList.size(); j++) {
         i.paintList.get(j).drawLine(i);
         i.count++;
       }
-          image(i.pg, 0, 0);
+      image(i.pg, 0, 0);
 
 
     }
@@ -210,9 +213,8 @@ void inputSelected(File selection) {
     println("Window was closed or the user hit cancel.");
   } else {
     if(accept(selection.getName())){
-      a.pg.beginDraw();
-      a.pg.image(loadImage( selection.getAbsolutePath()),0,120);
-      a.pg.endDraw();
+      PImage img = loadImage( selection.getAbsolutePath());
+      layers.add(new Image(img.width,img.height,t,img));
 
     }
   }

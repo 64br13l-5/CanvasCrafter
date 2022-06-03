@@ -11,6 +11,8 @@ public class canvas{
     pg.beginDraw();
     pg.endDraw();
   }
+  public void renderImage(){
+  }
   public boolean isEnabled(){
     return enabled;
   }
