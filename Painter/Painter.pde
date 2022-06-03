@@ -6,7 +6,6 @@ import java.util.*;
 public PGraphics pg;
 Controller keyboardInput;
 int sx;
-//int toolType;
 int time;
 int sy; 
 canvas a;
@@ -18,6 +17,7 @@ tool t;
 Bucket b;
 Brush w;
 int sw;
+int opacity;
 void setup() {
   size(1000, 800);
   keyboardInput = new Controller();

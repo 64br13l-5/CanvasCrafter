@@ -108,7 +108,7 @@ public class paint {
       if(eraser)     cv.pg.stroke(c,0);
       else cv.pg.stroke(c);
       cv.pg.strokeWeight(strw);
-      if(brush)  cv.pg.blendMode(BLEND);
+      if(brush)  cv.pg.blendMode(OVERLAY);
       else cv.pg.blendMode(REPLACE);
       cv.pg.line(x, constrain(y, 120, height), xstart, constrain(ystart, 120, height));
       cv.pg.popStyle();
