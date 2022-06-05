@@ -2,6 +2,7 @@ public class Brush extends tool {
   private int sw;
   private color c;
   public Brush(int sw, color c) {
+    this.sw = sw;
     this.c = c;
   }
   public void setSW(int sw) {
