@@ -12,10 +12,11 @@ int cx = (215);
 pen p; 
 Eraser e; 
 tool d; 
+pointer pntr;
 tool t;
 Bucket b;
 int sw;
-
+boolean await = false;
 void setup() {
   size(1000, 800);
   background(255);
@@ -29,7 +30,9 @@ void setup() {
   e = new Eraser(sw);
   b = new Bucket(C);
   d = new tool();
+  pntr = new pointer();
   t = p;
+  
 }
 void mouseClicked() {
   if ((mouseX > 30 && mouseX < 60) && (mouseY > 30 && mouseY < 60)) {
@@ -42,11 +45,15 @@ void mouseClicked() {
     time = millis();
   } else if ((mouseX > 90 && mouseX < 120) && (mouseY > 90 && mouseY < 120)) {
     layers.add(new canvas());
-  }  else if ((mouseX > 675 && mouseX < 705) && (mouseY > 90 && mouseY < 100)) {
+    println('A');
+  }  else if ((mouseX > 735 && mouseX < 765) && (mouseY > 90 && mouseY < 100)) {
+    
     selectInput("Select a folder to process:", "inputSelected");
+    await = true;
+    while(await == true) delay(10);
     
 
-  } else if ((mouseX > 675 && mouseX < 705) && (mouseY > 110 && mouseY < 120)) {
+  } else if ((mouseX > 735 && mouseX < 765) && (mouseY > 110 && mouseY < 120)) {
     selectFolder("Select a folder to process:", "folderSelected");
     
   } else if ((mouseX > 150 && mouseX < 180) && (mouseY > 90 && mouseY < 120)) {
@@ -60,7 +67,10 @@ void mouseClicked() {
     t = b;
   }else if ((mouseX > 615 && mouseX < 645) && (mouseY > 90 && mouseY < 120)) {
     t = d;
-  } else if ((mouseX > 30 && mouseX < 60) && (mouseY > 90 && mouseY < 120)) {
+  } else if ((mouseX > 675 && mouseX < 705) && (mouseY > 90 && mouseY < 120)) {
+    t = pntr;
+  }
+  else if ((mouseX > 30 && mouseX < 60) && (mouseY > 90 && mouseY < 120)) {
     Color c;
     c = JColorChooser.showDialog(null, "Choose a Color", Color.black);
     if (c != null) C = color(c.getRed(), c.getGreen(), c.getBlue(),c.getAlpha());
@@ -78,9 +88,21 @@ void mouseClicked() {
     }
   }
 }
+void inputSelected(File selection) {
+  if (selection == null) {
+    println("Window was closed or the user hit cancel.");
+    await = false;
+  } else {
+    if(accept(selection.getName())){
+      PImage img = loadImage( selection.getAbsolutePath());
+      layers.add(new Image(img.width,img.height,img));
+    }
+    await = false;
+  }
+}
 void draw() {
   background(255);
-  if(t!=b && t !=d && mouseY > 120){
+  if(t ==p && t ==e && mouseY > 120){
     pushStyle();
     noCursor();
     strokeWeight(1);
@@ -89,50 +111,14 @@ void draw() {
     circle(mouseX,mouseY,sw);
  popStyle();
   }
-  else
-    cursor();
+  else cursor();
   fill(190, 190, 190, 255);
   rect(0, 0, width, 120);
   fill(255);
   rect(200, 90, 205, 30);
   line(215, 105, 390, 105);
   circle(cx, 105, 20);
-  if ((mouseX > 200 && mouseX < 405) && mouseY > 90 && mouseY < 120 && mousePressed) {
-    sw = (int)(constrain(mouseX-215, 0, 175)*0.571428571);
-    e.setSW(sw);
-    p.setSW(sw);
-    cx = constrain(mouseX, 215, 390);
-  } else if (mousePressed && mouseY >120 ) {
-    if(t.equals(d)){
-     
-      if(a.pg.pixels[mouseX +mouseY*width] != 0) {
-        C = a.pg.pixels[mouseX +mouseY*width];
-      p.setC(C);
-      b.setColor(C);
-      }
-    }
-    else if (a.isEnabled()) {   
-      a.addPaint(t.makePaint());
-    }
-  }
-  for (canvas i : layers) {
-    if (i.isEnabled()) {
-     if(i.getClass().getName() == "Painter$Image"){
-       i.renderImage();
-     }
-      for (int j = i.count; j < i.paintList.size(); j++) {
-        i.paintList.get(j).drawLine(i);
-        i.count++;
-      }
-      image(i.pg, 0, 0);
-
-
-    }
-  }
-  sx = mouseX;
-  sy = mouseY;
-
-  for (int i = 1; i <= layers.size(); i++) {
+   for (int i = 1; i <= layers.size(); i++) {
     strokeWeight(1);
     pushStyle();
     if (layers.get(i-1).isEnabled())    
@@ -153,9 +139,11 @@ void draw() {
   square(555, 90, 30);
   fill((t.equals(d))? #00ff00 : 255);
   square(615, 90, 30);
+   fill((t.equals(pntr))? #00ff00 : 255);
+  square(675, 90, 30);
   fill(255);
-  rect(675,90,30,10);
-  rect(675,110,30,10);
+  rect(735,90,30,10);
+  rect(735,110,30,10);
   circle(105, 105, 30);
   circle(165, 105, 30);
   pushStyle();
@@ -170,8 +158,10 @@ void draw() {
   text("eraser", 435, 105);
   textSize(9);
   text("bucket", 555, 105);
-  text("import", 675, 99);
-  text("export", 675, 119);
+  text("pointer", 675, 105);
+
+  text("import", 735, 99);
+  text("export", 735, 119);
   textSize(8);
     text("dropper", 615, 105);
 
@@ -185,8 +175,47 @@ void draw() {
   popStyle();
   fill(C);
   square(30, 90, 30);
-  // pop();
-  //circle(95, 45, 20);
+  // SLIDER for stroke width
+  if(mousePressed){
+  if ((mouseX > 200 && mouseX < 405) && mouseY > 90 && mouseY < 120 ) {
+    sw = (int)(constrain(mouseX-215, 0, 175)*0.571428571);
+    e.setSW(sw);
+    p.setSW(sw);
+    cx = constrain(mouseX, 215, 390);
+  } else if ( mouseY >120 ) {
+    if(t.equals(d)){
+     
+      if(a.pg.pixels[mouseX +mouseY*width] != 0) {
+        C = a.pg.pixels[mouseX +mouseY*width];
+      p.setC(C);
+      b.setColor(C);
+      }
+    }
+    else if (a.isEnabled() && t != pntr) {   
+      a.addPaint(t.makePaint());
+    }
+  }
+  }
+  //Draw Func
+  //load
+  for (canvas i : layers) {
+    if (i.isEnabled()) {
+     if(i.getClass().getName() == "Painter$Image"){
+       i.renderImage(t);
+     }
+      for (int j = i.count; j < i.paintList.size(); j++) {
+        i.paintList.get(j).drawLine(i);
+        i.count++;
+      }
+      image(i.pg, 0, 0);
+
+
+    }
+  }
+  //load
+  sx = mouseX;
+  sy = mouseY;
+  //start position for draw
 }
 void folderSelected(File selection) {
   if (selection == null) {
@@ -208,14 +237,3 @@ void folderSelected(File selection) {
       }
     return false;
   }
-void inputSelected(File selection) {
-  if (selection == null) {
-    println("Window was closed or the user hit cancel.");
-  } else {
-    if(accept(selection.getName())){
-      PImage img = loadImage( selection.getAbsolutePath());
-      layers.add(new Image(img.width,img.height,t,img));
-
-    }
-  }
-}

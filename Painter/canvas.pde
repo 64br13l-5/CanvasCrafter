@@ -11,7 +11,7 @@ public class canvas{
     pg.beginDraw();
     pg.endDraw();
   }
-  public void renderImage(){
+  public void renderImage(tool t){
   }
   public boolean isEnabled(){
     return enabled;
