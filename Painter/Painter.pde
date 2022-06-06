@@ -128,7 +128,8 @@ void draw() {
     fill(255);
     square(30 + 60 *i, 30, 30);
     fill(0);
-    text("layer " + i, 30 + 60 * i, 30, 30, 30);
+    if(layers.get(i-1).getClass().getName() == "Painter$Image")    text("Image", 30 + 60 * i, 30, 30, 30);
+    else text("Layer " + i, 30 + 60 * i, 30, 30, 30);
     popStyle();
   }
   fill((t.equals(e)) ? #00ff00 : 255);
