@@ -112,6 +112,49 @@ void draw() {
  popStyle();
   }
   else cursor();
+  
+  // SLIDER for stroke width
+  if(mousePressed){
+  if ((mouseX > 200 && mouseX < 405) && mouseY > 90 && mouseY < 120 ) {
+    sw = (int)(constrain(mouseX-215, 0, 175)*0.571428571);
+    e.setSW(sw);
+    p.setSW(sw);
+    cx = constrain(mouseX, 215, 390);
+  } else if ( mouseY >120 ) {
+    if(t.equals(d)){
+     
+      if(a.pg.pixels[mouseX +mouseY*width] != 0) {
+        C = a.pg.pixels[mouseX +mouseY*width];
+      p.setC(C);
+      b.setColor(C);
+      }
+    }
+    else if (a.isEnabled() && t != pntr) {   
+      a.addPaint(t.makePaint());
+    }
+  }
+  }
+  //Draw Func
+  //load
+  for (canvas i : layers) {
+    if (i.isEnabled()) {
+     if(i.getClass().getName() == "Painter$Image"){
+       i.renderImage(t);
+     }
+      for (int j = i.count; j < i.paintList.size(); j++) {
+        i.paintList.get(j).drawLine(i);
+        i.count++;
+      }
+      image(i.pg, 0, 0);
+
+
+    }
+  }
+  //load
+  sx = mouseX;
+  sy = mouseY;
+  //start position for draw
+  //gui 
   fill(190, 190, 190, 255);
   rect(0, 0, width, 120);
   fill(255);
@@ -176,47 +219,6 @@ void draw() {
   popStyle();
   fill(C);
   square(30, 90, 30);
-  // SLIDER for stroke width
-  if(mousePressed){
-  if ((mouseX > 200 && mouseX < 405) && mouseY > 90 && mouseY < 120 ) {
-    sw = (int)(constrain(mouseX-215, 0, 175)*0.571428571);
-    e.setSW(sw);
-    p.setSW(sw);
-    cx = constrain(mouseX, 215, 390);
-  } else if ( mouseY >120 ) {
-    if(t.equals(d)){
-     
-      if(a.pg.pixels[mouseX +mouseY*width] != 0) {
-        C = a.pg.pixels[mouseX +mouseY*width];
-      p.setC(C);
-      b.setColor(C);
-      }
-    }
-    else if (a.isEnabled() && t != pntr) {   
-      a.addPaint(t.makePaint());
-    }
-  }
-  }
-  //Draw Func
-  //load
-  for (canvas i : layers) {
-    if (i.isEnabled()) {
-     if(i.getClass().getName() == "Painter$Image"){
-       i.renderImage(t);
-     }
-      for (int j = i.count; j < i.paintList.size(); j++) {
-        i.paintList.get(j).drawLine(i);
-        i.count++;
-      }
-      image(i.pg, 0, 0);
-
-
-    }
-  }
-  //load
-  sx = mouseX;
-  sy = mouseY;
-  //start position for draw
 }
 void folderSelected(File selection) {
   if (selection == null) {

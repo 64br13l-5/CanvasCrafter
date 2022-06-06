@@ -51,7 +51,7 @@ public class Image extends canvas{
     }
     sx = mouseX;
     sy = mouseY;
-    }
+    } else render = false;
     if(render == false){
     pg.beginDraw();
     pg.image(img,x,y,w,h);
