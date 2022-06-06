@@ -15,27 +15,26 @@ public class Image extends canvas{
    enable(true);
   }
   public void renderImage(){
-    
-    if(mousePressed){
+    if(mousePressed && a == this){
       if(mouseX > x && mouseY > y && mouseX < x+w && mouseY < x+w){
-            x = mouseX - sx;
-            y = mouseY - sy;
+            x += mouseX - sx;
+            y += mouseY - sy;
             pg.clear();
             render = false;
-            println("hi");
+
       }
     }
+    sx = mouseX;
+    sy = mouseY;
     if(render == false){
     pg.beginDraw();
     pg.image(img,x,y);
-    pg.square(x,y+w/2,10);
-    pg.square(x+w-10,y+w/2,10);
+    pg.square(x,y+h/2,10);
+    pg.square(x+w-10,y+h/2,10);
     pg.square(x+w/2,y,10);
-    pg.square(x+w/2,y+w-10,10);
+    pg.square(x+w/2,y+h-10,10);
     pg.endDraw();
     render = true; 
-    sx = x;
-    sy = y;
     }
    
     image(pg,0,120);
