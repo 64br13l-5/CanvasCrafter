@@ -102,7 +102,7 @@ void inputSelected(File selection) {
 }
 void draw() {
   background(255);
-  if(t ==p && t ==e && mouseY > 120){
+  if((t ==p || t ==e )&& mouseY > 120){
     pushStyle();
     noCursor();
     strokeWeight(1);
