@@ -69,6 +69,7 @@ void mouseClicked() {
         current.enable(e = !e);
       } else if (mouseY > 5 && mouseY < 30) {
         a = layers.get(i-1);
+        a.enable(true);
       }
     }
   }
@@ -206,7 +207,7 @@ void draw() {
     //check if the button P1_RIGHT is being pressed:
     if (keyboardInput.isPressed(Controller.P1_LEFT) && keyboardInput.isPressed(Controller.P1Y)) {
         if(a.count2 > 0 )
-    a.count2--;
+      a.count2--;
 }
 }
 
