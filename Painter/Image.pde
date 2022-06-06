@@ -16,12 +16,37 @@ public class Image extends canvas{
     if(t.getClass().getName() == "Painter$pointer"){
       
     if(mousePressed && a == this){
-      if(mouseX > x && mouseY > y && mouseX < x+w && mouseY < x+w){
+      if(mouseX > x-10 && mouseX < x+10 && mouseY > (y+110+h/2)&& mouseY < (y+130+h/2))
+      {
+         w -= mouseX - sx;
+         x += mouseX - sx;
+         pg.clear();
+         render = false;
+      }
+      else if(mouseX > x+w-10 && mouseX < x+w+10 && mouseY > (y+110+h/2)&& mouseY < (y+130+h/2))
+      {
+         w += mouseX - sx;
+         pg.clear();
+         render = false;
+      }
+      else if(mouseX > x+w/2-10 && mouseX < x+w/2+10  && mouseY > (y+110)&& mouseY < (y+130))
+      {
+         h -= mouseY - sy;
+         y += mouseY - sy;
+         pg.clear();
+         render = false;
+      }
+      else if(mouseX > x+w/2-10  && mouseX < x+w/2+10  && mouseY > (y+110+h)&& mouseY < (y+130+h))
+      {
+         h += mouseY - sy;
+         pg.clear();
+         render = false;
+      }
+      else if(mouseX > x && mouseY > y && mouseX < x+w && mouseY < x+w){
             x += mouseX - sx;
             y += mouseY - sy;
             pg.clear();
             render = false;
-
       }
     }
     sx = mouseX;
