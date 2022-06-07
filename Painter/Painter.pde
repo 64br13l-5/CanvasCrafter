@@ -3,7 +3,7 @@ ArrayList<canvas>layers;
 import javax.swing.JColorChooser;
 import java.awt.Color;
 int sx;
-//int toolType;
+Controller keyboardInput;
 int time;
 int sy; 
 canvas a;
@@ -28,11 +28,18 @@ void setup() {
   sw = 2;
   p = new pen(C, sw);
   e = new Eraser(sw);
+  keyboardInput = new Controller();
   b = new Bucket(C);
   d = new tool();
   pntr = new pointer();
   t = p;
   
+}
+void keyReleased() {
+  keyboardInput.release(keyCode);
+}
+void keyPressed() {
+  keyboardInput.press(keyCode);
 }
 void mouseClicked() {
   if ((mouseX > 30 && mouseX < 60) && (mouseY > 30 && mouseY < 60)) {
@@ -132,6 +139,10 @@ void draw() {
       }
     }
     else if (a.isEnabled() && t != pntr) {   
+      if(a.count2>0){
+        a.paintList.subList(a.paintList.size()-a.count2,a.paintList.size()).clear();
+        a.count2=0;
+      }
       a.addPaint(t.makePaint());
     }
   }
@@ -143,11 +154,12 @@ void draw() {
      if(i.getClass().getName() == "Painter$Image"){
        i.renderImage(t);
      }
-      for (int j = i.count; j < i.paintList.size(); j++) {
+      for (int j = i.count; j < i.paintList.size()-a.count2; j++) {
         i.paintList.get(j).drawLine(i);
         i.count++;
       }
       image(i.pg, 0, 0);
+      
 
 
     }
@@ -221,6 +233,24 @@ void draw() {
   popStyle();
   fill(C);
   square(30, 90, 30);
+  if (keyboardInput.isPressed(Controller.LCNTRL ) && keyboardInput.isPressed(Controller.Z)) {
+
+    if(a.count2 < a.paintList.size()){
+    a.count2++;
+
+    }
+    a.count = 0;
+    println(a.paintList.size()-a.count2);
+    a.pg.beginDraw();
+    a.pg.clear();
+    a.pg.endDraw();
+  }
+
+    //check if the button P1_RIGHT is being pressed:
+    if (keyboardInput.isPressed(Controller.LCNTRL) && keyboardInput.isPressed(Controller.Y)) {
+        if(a.count2 > 0 )
+      a.count2--;
+}
 }
 void folderSelected(File selection) {
   if (selection == null) {
@@ -244,3 +274,36 @@ void folderSelected(File selection) {
       }
     return false;
   }
+  class Controller {
+  static final int LCNTRL = 0;
+  static final int Z = 1;
+  static final int Y = 2;
+  boolean [] inputs;
+
+  public Controller() {
+    inputs = new boolean[3];//2 valid buttons
+  }
+
+  /**@param code: a valid constant e.g. P1_LEFT
+   */
+  boolean isPressed(int code) {
+    return inputs[code];
+  }
+
+  void press(int code) {
+    if (code == 17)
+      inputs[LCNTRL] = true;
+    if (code == 'Z')
+      inputs[Z] = true;
+    if (code == 'Y')
+      inputs[Y] = true;
+  }
+  void release(int code) {
+    if (code == 17)
+      inputs[LCNTRL] = false;
+    if (code == 'Z')
+      inputs[Z] = false;
+    if (code == 'Y')
+      inputs[Y] = false;
+  }
+}
