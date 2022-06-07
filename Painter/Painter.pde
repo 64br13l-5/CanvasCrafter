@@ -55,6 +55,8 @@ void mouseClicked() {
 
   } else if ((mouseX > 735 && mouseX < 765) && (mouseY > 110 && mouseY < 120)) {
     selectFolder("Select a folder to process:", "folderSelected");
+     await = true;
+    while(await == true) delay(10);
     
   } else if ((mouseX > 150 && mouseX < 180) && (mouseY > 90 && mouseY < 120)) {
     if (layers.size() > 1)
@@ -223,10 +225,12 @@ void draw() {
 void folderSelected(File selection) {
   if (selection == null) {
     println("Window was closed or the user hit cancel.");
+    await=false;
   } else {
     println("saved to " + selection.getAbsolutePath());
     PImage temp = get(0, 120, width, height-120);
     temp.save(selection.getAbsolutePath() + "\\image.jpg");
+    await=false;
   }
 }
   static final String[] exts = { ".gif", ".png", ".jpeg", ".jpg", ".tiff", ".tif"};
