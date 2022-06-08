@@ -52,7 +52,6 @@ void mouseClicked() {
     time = millis();
   } else if ((mouseX > 90 && mouseX < 120) && (mouseY > 90 && mouseY < 120)) {
     layers.add(new canvas());
-    println('A');
   }  else if ((mouseX > 735 && mouseX < 765) && (mouseY > 90 && mouseY < 100)) {
     
     selectInput("Select a folder to process:", "inputSelected");
@@ -154,7 +153,7 @@ void draw() {
      if(i.getClass().getName() == "Painter$Image"){
        i.renderImage(t);
      }
-      for (int j = i.count; j < i.paintList.size()-a.count2; j++) {
+      for (int j = i.count; j < i.paintList.size()-i.count2; j++) {
         i.paintList.get(j).drawLine(i);
         i.count++;
       }
@@ -240,7 +239,6 @@ void draw() {
 
     }
     a.count = 0;
-    println(a.paintList.size()-a.count2);
     a.pg.beginDraw();
     a.pg.clear();
     a.pg.endDraw();
