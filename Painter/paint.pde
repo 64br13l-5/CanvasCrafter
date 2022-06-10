@@ -98,6 +98,8 @@ public class paint {
       }
     }
   }
+  public void sprayTool(int x, int y, canvas cv) {
+  }
   public void drawLine(canvas cv) {
     if (bucket) {
       filltool2(x,y,cv);
@@ -106,9 +108,10 @@ public class paint {
       cv.pg.beginDraw();
       cv.pg.pushStyle();
       if(eraser)     cv.pg.stroke(c,0);
+      else if(Spray) 
       else cv.pg.stroke(c);
       cv.pg.strokeWeight(strw);
-      if(brush)  cv.pg.blendMode(OVERLAY);
+      if(brush)  cv.pg.blendMode(SCREEN);
       else cv.pg.blendMode(REPLACE);
       cv.pg.line(x, constrain(y, 120, height), xstart, constrain(ystart, 120, height));
       cv.pg.popStyle();
