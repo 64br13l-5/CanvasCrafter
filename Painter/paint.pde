@@ -5,7 +5,7 @@ public class paint {
   private boolean eraser;
   private boolean brush;
   
-  public paint(int X, int Y, int xs, int ys, color col, int sw, boolean bucket,boolean eraser, boolean brush) {
+  public paint(int X, int Y, int xs, int ys, color col, int sw, boolean bucket,boolean eraser, boolean brush, boolean spray) {
     x = X;
     y = Y;
     xstart = xs;

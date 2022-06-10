@@ -8,6 +8,6 @@ public class Bucket extends tool {
   }
   //this is a placeholder we want the bucket tool to make more than one paint so im not totally sure how we can do that
   public paint makePaint() {
-    return new paint(mouseX, mouseY, sx, sy, c, 2,true,false, false);
+    return new paint(mouseX, mouseY, sx, sy, c, 2,true,false, false, false);
   }
 }

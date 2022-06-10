@@ -7,7 +7,7 @@ public class tool{
     return index;
   }
   public paint makePaint() {
-    return new paint(mouseX, mouseY, sx, sy, 0, 2,false,false, false);
+    return new paint(mouseX, mouseY, sx, sy, 0, 2,false,false, false, false);
   }
   public void setSW(int sw) {
     this.sw = sw;
