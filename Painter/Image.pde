@@ -16,33 +16,33 @@ public class Image extends canvas{
     if(t.getClass().getName() == "Painter$pointer"){
       
     if(mousePressed && a == this){
-      if(mouseX > x-10 && mouseX < x+10 && mouseY > (y+110+h/2)&& mouseY < (y+130+h/2))
+      if(mouseX > x-20 && mouseX < x+20 && mouseY > (y+100+h/2)&& mouseY < (y+140+h/2))
       {
          w -= mouseX - sx;
          x += mouseX - sx;
          pg.clear();
          render = false;
       }
-      else if(mouseX > x+w-10 && mouseX < x+w+10 && mouseY > (y+110+h/2)&& mouseY < (y+130+h/2))
+      else if(mouseX > x+w-20 && mouseX < x+w+20 && mouseY > (y+100+h/2)&& mouseY < (y+140+h/2))
       {
          w += mouseX - sx;
          pg.clear();
          render = false;
       }
-      else if(mouseX > x+w/2-10 && mouseX < x+w/2+10  && mouseY > (y+110)&& mouseY < (y+130))
+      else if(mouseX > x+w/2-20 && mouseX < x+w/2+20  && mouseY > (y+100)&& mouseY < (y+140))
       {
          h -= mouseY - sy;
          y += mouseY - sy;
          pg.clear();
          render = false;
       }
-      else if(mouseX > x+w/2-10  && mouseX < x+w/2+10  && mouseY > (y+110+h)&& mouseY < (y+130+h))
+      else if(mouseX > x+w/2-20  && mouseX < x+w/2+20  && mouseY > (y+100+h)&& mouseY < (y+140+h))
       {
          h += mouseY - sy;
          pg.clear();
          render = false;
       }
-      else if(mouseX > x && mouseY > y && mouseX < x+w && mouseY < x+w){
+      else if(mouseX > x && mouseY > y+120 && mouseX < x+w && mouseY < y+h){
             x += mouseX - sx;
             y += mouseY - sy;
             pg.clear();
