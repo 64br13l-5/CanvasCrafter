@@ -110,16 +110,7 @@ void inputSelected(File selection) {
 }
 void draw() {
   background(255);
-  if((t ==p || t ==e )&& mouseY > 120){
-    pushStyle();
-    noCursor();
-    strokeWeight(1);
-    stroke(0);
-    fill(C,t==e ? 0 : 255);
-    circle(mouseX,mouseY,sw);
- popStyle();
-  }
-  else cursor();
+  
   
   // SLIDER for stroke width
   if(mousePressed){
@@ -249,6 +240,17 @@ void draw() {
         if(a.count2 > 0 )
       a.count2--;
 }
+if((t ==p || t ==e )&& mouseY > 120){
+    pushStyle();
+    noCursor();
+    strokeWeight(1);
+    stroke(t==e ? 0 : 255);
+
+    fill(C,t==e ? 0 : 255);
+    circle(mouseX,mouseY,sw);
+ popStyle();
+  }
+  else cursor();
 }
 void folderSelected(File selection) {
   if (selection == null) {

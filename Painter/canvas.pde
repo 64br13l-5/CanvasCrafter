@@ -9,6 +9,7 @@ public class canvas{
     enabled = false; 
     paintList = new ArrayList<paint>();
     pg = createGraphics(width,height);
+    
     pg.beginDraw();
     pg.endDraw();
   }
