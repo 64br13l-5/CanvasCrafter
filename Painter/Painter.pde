@@ -243,7 +243,7 @@ void draw() {
 if((t ==p || t ==e )&& mouseY > 120){
     pushStyle();
     noCursor();
-    strokeWeight(1);
+    strokeWeight(0);
     stroke(t==e ? 0 : 255);
 
     fill(C,t==e ? 0 : 255);

@@ -42,7 +42,7 @@ public class Image extends canvas{
          pg.clear();
          render = false;
       }
-      else if(mouseX > x && mouseY > y+120 && mouseX < x+w && mouseY < y+h){
+      else if(mouseX > x && mouseY > y+120 && mouseX < x+w && mouseY < y+120+h){
             x += mouseX - sx;
             y += mouseY - sy;
             pg.clear();
