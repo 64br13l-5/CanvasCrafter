@@ -109,7 +109,7 @@ void inputSelected(File selection) {
   }
 }
 void draw() {
-  background(255);
+  background(200);
   
   
   // SLIDER for stroke width
@@ -244,7 +244,7 @@ if((t ==p || t ==e )&& mouseY > 120){
     pushStyle();
     noCursor();
     strokeWeight(0);
-    stroke(t==e ? 0 : 255);
+    stroke(t==e ? 0 : color(255-red(C),255-green(C),255-blue(C)));
 
     fill(C,t==e ? 0 : 255);
     circle(mouseX,mouseY,sw);
