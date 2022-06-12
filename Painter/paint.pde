@@ -108,7 +108,7 @@ public class paint {
       cv.pg.beginDraw();
       cv.pg.pushStyle();
       if(eraser)     cv.pg.stroke(c,0);
-      else if(Spray) 
+      //else if(Spray) 
       else cv.pg.stroke(c);
       cv.pg.strokeWeight(strw);
       if(brush)  cv.pg.blendMode(SCREEN);
