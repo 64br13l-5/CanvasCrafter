@@ -8,7 +8,7 @@ int time;
 int sy; 
 canvas a;
 color C = 0;
-int cx = (215);
+int cx = (105);
 pen p; 
 Eraser e; 
 tool d; 
@@ -50,32 +50,32 @@ void mouseClicked() {
     a.pg.endDraw();
     square(30, 30, 30);
     time = millis();
-  } else if ((mouseX > 90 && mouseX < 120) && (mouseY > 90 && mouseY < 120)) {
+  } else if ((mouseX > 90 && mouseX < 120) && (mouseY >30 && mouseY < 60)) {
     layers.add(new canvas());
-  }  else if ((mouseX > 735 && mouseX < 765) && (mouseY > 90 && mouseY < 100)) {
+  }  else if ((mouseX > 795 && mouseX < 825) && (mouseY > 90 && mouseY < 120)) {
     
     selectInput("Select a folder to process:", "inputSelected");
     await = true;
     while(await == true) delay(10);
     
 
-  } else if ((mouseX > 735 && mouseX < 765) && (mouseY > 110 && mouseY < 120)) {
+  } else if ((mouseX > 855 && mouseX < 885) && (mouseY > 90 && mouseY < 120)) {
     selectFolder("Select a folder to process:", "folderSelected");
      await = true;
     while(await == true) delay(10);
     
-  } else if ((mouseX > 150 && mouseX < 180) && (mouseY > 90 && mouseY < 120)) {
+  } else if ((mouseX > 150 && mouseX < 180) && (mouseY > 30 && mouseY < 60)) {
     if (layers.size() > 1)
       layers.remove(layers.size()-1);
-  } else if ((mouseX > 435 && mouseX < 465) && (mouseY > 90 && mouseY < 120)) {
+  } else if ((mouseX > 315 && mouseX < 345) && (mouseY > 90 && mouseY < 120)) {
     t = e;
-  } else if ((mouseX > 495 && mouseX < 525) && (mouseY > 90 && mouseY < 120)) {
+  } else if ((mouseX > 375 && mouseX < 405) && (mouseY > 90 && mouseY < 120)) {
     t = p;
-  } else if ((mouseX > 555 && mouseX < 605) && (mouseY > 90 && mouseY < 120)) {
+  } else if ((mouseX > 435 && mouseX < 465) && (mouseY > 90 && mouseY < 120)) {
     t = b;
-  }else if ((mouseX > 615 && mouseX < 645) && (mouseY > 90 && mouseY < 120)) {
+  }else if ((mouseX > 495 && mouseX < 525) && (mouseY > 90 && mouseY < 120)) {
     t = d;
-  } else if ((mouseX > 675 && mouseX < 705) && (mouseY > 90 && mouseY < 120)) {
+  } else if ((mouseX > 555 && mouseX < 585) && (mouseY > 90 && mouseY < 120)) {
     t = pntr;
   }
   else if ((mouseX > 30 && mouseX < 60) && (mouseY > 90 && mouseY < 120)) {
@@ -85,7 +85,7 @@ void mouseClicked() {
     p.setC(C);
     b.setColor(C);
   } else for (int i = 1; i <= layers.size(); i++) {
-    if (mouseX > 30+60*i && mouseX < 60+60*i) {
+    if (mouseX > 150+60*i && mouseX < 180+60*i) {
       if (mouseY > 30 && mouseY < 60) {
         canvas current = layers.get(i-1);
         boolean e = current.isEnabled();
