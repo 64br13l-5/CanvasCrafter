@@ -20,9 +20,7 @@ tool t;
 Bucket b;
 Brush w;
 int sw;
-
 boolean await = false;
-
 void setup() {
   size(1000, 800);
   keyboardInput = new Controller();
@@ -37,16 +35,18 @@ void setup() {
   e = new Eraser(sw);
   keyboardInput = new Controller();
   b = new Bucket(C);
-
   w = new Brush(C, sw);
-
   d = new tool();
   pntr = new pointer();
-
   t = p;
   
 }
-
+void keyReleased() {
+  keyboardInput.release(keyCode);
+}
+void keyPressed() {
+  keyboardInput.press(keyCode);
+}
 void mouseClicked() {
   if ((mouseX > 30 && mouseX < 60) && (mouseY > 30 && mouseY < 60)) {
     a.paintList.clear();    
@@ -125,6 +125,40 @@ void keyPressed() {
   }
 }
 
+void draw() {
+  
+  //drawing stuff
+  background(255);
+  pushStyle();
+  strokeWeight(1);
+  stroke(0);
+  fill(C, t==e ? 0 : 255);
+  circle(mouseX, mouseY, sw);
+  popStyle();
+  fill(190, 190, 190, 255);
+  rect(0, 0, width, 120);
+  fill(255);
+  rect(200, 90, 205, 30);
+  line(215, 105, 390, 105);
+  circle(cx, 105, 20);
+  
+  //slider + drawing
+  if ((mouseX > 200 && mouseX < 405) && mouseY > 90 && mouseY < 120 && mousePressed) {
+    sw = (int)(constrain(mouseX-215, 0, 175)*0.571428571);
+    e.setSW(sw);
+    p.setSW(sw);
+    w.setSW(sw);
+    cx = constrain(mouseX, 215, 390);
+  } else if (mousePressed && mouseY >120 ) {
+    if (a.isEnabled()) {   
+      if (a.count2 > 0) {
+        while (a.count2 > 0) {
+          a.count2--;
+          if (a.paintList.size() > 0) {
+          a.paintList.remove(a.paintList.size() - 1);
+          }
+        }
+=======
 void inputSelected(File selection) {
   if (selection == null) {
     println("Window was closed or the user hit cancel.");
@@ -147,7 +181,6 @@ void draw() {
     sw = (int)(constrain(mouseX-105, 1, 175)*0.571428571);
     e.setSW(sw);
     p.setSW(sw);
-    w.setSW(sw);
     cx = constrain(mouseX, 105, 280);
   } else if ( mouseY >120 ) {
     if(t.equals(d)){
@@ -156,24 +189,26 @@ void draw() {
         C = a.pg.pixels[mouseX +mouseY*width];
       p.setC(C);
       b.setColor(C);
-      w.setC(C);
       }
     }
     else if (a.isEnabled() && t != pntr) {   
       if(a.count2>0){
         a.paintList.subList(a.paintList.size()-a.count2,a.paintList.size()).clear();
         a.count2=0;
-
+>>>>>>> Gabriel
       }
       a.addPaint(t.makePaint());
     }
   }
-  }
-
+<<<<<<< HEAD
   
   //drawing each paint
   
-
+  for (canvas i : layers) {
+    if (i.isEnabled()) {
+      for (int j = i.count; j < i.paintList.size() - i.count2; j++) {
+=======
+  }
   //Draw Func
   //load
   for (canvas i : layers) {
@@ -182,17 +217,27 @@ void draw() {
        i.renderImage(t);
      }
       for (int j = i.count; j < i.paintList.size()-i.count2; j++) {
+>>>>>>> Gabriel
         i.paintList.get(j).drawLine(i);
         i.count++;
       }
       image(i.pg, 0, 0);
+<<<<<<< HEAD
+=======
+      
 
+
+>>>>>>> Gabriel
     }
   }
   //load
   sx = mouseX;
   sy = mouseY;
-
+<<<<<<< HEAD
+  
+  //draw the layer buttons
+  for (int i = 1; i <= layers.size(); i++) {
+=======
   //start position for draw
   //gui 
   fill(190, 190, 190, 255);
@@ -202,7 +247,7 @@ void draw() {
   line(105, 105, 280, 105);
   circle(cx, 105, 20);
    for (int i = 1; i <= layers.size(); i++) {
-
+>>>>>>> Gabriel
     strokeWeight(1);
     pushStyle();
     if (layers.get(i-1).isEnabled())    
@@ -262,6 +307,33 @@ void draw() {
   text("-", 151, 60);
   popStyle();
   fill(C);
+<<<<<<< HEAD
+  square(30, 90, 30);
+  // pop();
+  //circle(95, 45, 20);
+
+  //CTRL Z AND Y STUFF 
+  if (keyboardInput.isPressed(Controller.P1_LEFT ) && keyboardInput.isPressed(Controller.P1_RIGHT)) {
+
+    if(a.count2 < a.paintList.size()){
+    a.count2++;
+    }
+    a.count = 0;
+    a.pg.clear();
+  }
+
+    //check if the button P1_RIGHT is being pressed:
+    if (keyboardInput.isPressed(Controller.P1_LEFT) && keyboardInput.isPressed(Controller.P1Y)) {
+        if(a.count2 > 0 )
+      a.count2--;
+}
+}
+
+class Controller {
+  static final int P1_LEFT = 0;
+  static final int P1_RIGHT = 1;
+  static final int P1Y = 2;
+=======
   circle(45, 105, 30);
   if (keyboardInput.isPressed(Controller.LCNTRL ) && keyboardInput.isPressed(Controller.Z)) {
 
@@ -290,7 +362,7 @@ if((t ==p || t ==e )&& mouseY > 120){
     circle(mouseX,mouseY,sw);
  popStyle();
   }
-   else cursor();
+  else cursor();
 }
 void folderSelected(File selection) {
   if (selection == null) {
@@ -318,7 +390,7 @@ void folderSelected(File selection) {
   static final int LCNTRL = 0;
   static final int Z = 1;
   static final int Y = 2;
-
+>>>>>>> Gabriel
   boolean [] inputs;
 
   public Controller() {
@@ -333,7 +405,21 @@ void folderSelected(File selection) {
 
   void press(int code) {
     if (code == 17)
-
+<<<<<<< HEAD
+      inputs[P1_LEFT] = true;
+    if (code == 'Z')
+      inputs[P1_RIGHT] = true;
+    if (code == 'Y')
+      inputs[P1Y] = true;
+  }
+  void release(int code) {
+    if (code == 17)
+      inputs[P1_LEFT] = false;
+    if (code == 'Z')
+      inputs[P1_RIGHT] = false;
+    if (code == 'Y')
+      inputs[P1Y] = false;
+=======
       inputs[LCNTRL] = true;
     if (code == 'Z')
       inputs[Z] = true;
@@ -347,5 +433,6 @@ void folderSelected(File selection) {
       inputs[Z] = false;
     if (code == 'Y')
       inputs[Y] = false;
+>>>>>>> Gabriel
   }
 }

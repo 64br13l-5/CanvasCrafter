@@ -10,8 +10,11 @@ public class canvas{
     enabled = false; 
     paintList = new ArrayList<paint>();
     pg = createGraphics(width,height);
+    
     pg.beginDraw();
     pg.endDraw();
+  }
+  public void renderImage(tool t){
   }
   public boolean isEnabled(){
     return enabled;
