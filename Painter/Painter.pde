@@ -114,11 +114,11 @@ void draw() {
   
   // SLIDER for stroke width
   if(mousePressed){
-  if ((mouseX > 200 && mouseX < 405) && mouseY > 90 && mouseY < 120 ) {
-    sw = (int)(constrain(mouseX-215, 1, 175)*0.571428571);
+  if ((mouseX > 90 && mouseX < 295) && mouseY > 90 && mouseY < 120 ) {
+    sw = (int)(constrain(mouseX-105, 1, 175)*0.571428571);
     e.setSW(sw);
     p.setSW(sw);
-    cx = constrain(mouseX, 215, 390);
+    cx = constrain(mouseX, 105, 280);
   } else if ( mouseY >120 ) {
     if(t.equals(d)){
      
@@ -162,8 +162,8 @@ void draw() {
   fill(190, 190, 190, 255);
   rect(0, 0, width, 120);
   fill(255);
-  rect(200, 90, 205, 30);
-  line(215, 105, 390, 105);
+  rect(90, 90, 205, 30);
+  line(105, 105, 280, 105);
   circle(cx, 105, 20);
    for (int i = 1; i <= layers.size(); i++) {
     strokeWeight(1);
@@ -171,29 +171,32 @@ void draw() {
     if (layers.get(i-1).isEnabled())    
       stroke(color(0, 255, 0));
     fill((a == layers.get(i-1)) ? #00ccee : 255);
-    triangle(35+60*i, 10, 55+60*i, 10, 45+60*i, 25);
+    triangle(155+60*i, 10, 175+60*i, 10, 165+60*i, 25);
     fill(255);
-    square(30 + 60 *i, 30, 30);
+    square(150 + 60 *i, 30, 30);
     fill(0);
     if(layers.get(i-1).getClass().getName() == "Painter$Image")    text("Image", 30 + 60 * i, 30, 30, 30);
-    else text("Layer " + i, 30 + 60 * i, 30, 30, 30);
+    else{
+    textSize(36);
+    text(""+i, 153 + 60 * i, 60);
+    }
     popStyle();
   }
   fill((t.equals(e)) ? #00ff00 : 255);
-  square(435, 90, 30);
+  square(315, 90, 30);
   fill((t.equals(p)) ? #00ff00 : 255);
-  square(495, 90, 30);
+  square(375, 90, 30);
   fill((t.equals(b)) ? #00ff00 : 255);
-  square(555, 90, 30);
+  square(435, 90, 30);
   fill((t.equals(d))? #00ff00 : 255);
-  square(615, 90, 30);
+  square(495, 90, 30);
    fill((t.equals(pntr))? #00ff00 : 255);
-  square(675, 90, 30);
+  square(555, 90, 30);
   fill(255);
-  rect(735,90,30,10);
-  rect(735,110,30,10);
-  circle(105, 105, 30);
-  circle(165, 105, 30);
+  square(795,90,30);
+  square(855,90,30);
+  square(90, 30, 30);
+  square(150, 30, 30);
   pushStyle();
   if (millis() - time < 300)
     stroke(0, 255, 0);
@@ -201,28 +204,28 @@ void draw() {
   popStyle();
   fill(0);
   text("clear", 32, 45);
-  text("pen", 497, 105);
+  text("pen", 377, 105);
   textSize(10);
-  text("eraser", 435, 105);
+  text("eraser", 315, 105);
   textSize(9);
-  text("bucket", 555, 105);
-  text("pointer", 675, 105);
+  text("bucket", 435, 105);
+  text("pointer", 555, 105);
 
-  text("import", 735, 99);
-  text("export", 735, 119);
+  text("import", 795, 105);
+  text("export", 855, 105);
   textSize(8);
-    text("dropper", 615, 105);
+    text("dropper", 495, 105);
 
   pushStyle();
   fill(0, 0, 255);
   textSize(42);
-  text("+", 89, 118);
+  text("+", 89, 58);
   fill(255, 0, 0);
   textSize(50);
-  text("-", 151, 120);
+  text("-", 151, 60);
   popStyle();
   fill(C);
-  square(30, 90, 30);
+  circle(45, 105, 30);
   if (keyboardInput.isPressed(Controller.LCNTRL ) && keyboardInput.isPressed(Controller.Z)) {
 
     if(a.count2 < a.paintList.size()){
