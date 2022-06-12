@@ -115,7 +115,7 @@ void draw() {
   // SLIDER for stroke width
   if(mousePressed){
   if ((mouseX > 200 && mouseX < 405) && mouseY > 90 && mouseY < 120 ) {
-    sw = (int)(constrain(mouseX-215, 0, 175)*0.571428571);
+    sw = (int)(constrain(mouseX-215, 1, 175)*0.571428571);
     e.setSW(sw);
     p.setSW(sw);
     cx = constrain(mouseX, 215, 390);
