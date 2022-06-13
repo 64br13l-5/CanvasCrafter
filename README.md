@@ -34,22 +34,31 @@ Alisa: finalize/fix undo and redo and continue working on the eraser
 Gabriel: transfered all of the layers to start using pgraphics to let eraser and transparency and other tools such as fill work per layer.
 Alisa: attempted to add a hashmap of paints to use for the eraser but did not push this because it proved to be fruitless. also tried to use Color to make transparency.  
 5/31/22  
-Gabriel: added circle to show size of pen when using, made eraser circle clear, finally fully fixed eraser.  
+Gabriel: added circle to show size of pen when using, made eraser circle clear, finally fully fixed eraser.
+Alisa: Started revamping CTRL Z and Y for pgraphics.
 6/1/22  
 Gabriel: started image importing, added image exporting. Remove cursor while drawing.  
+Alisa: Returned keyboard controls, finished CTRL Z and Y, tried to increase code readability.
 6/2/22  
 Gabriel: added dropper tool to select color under mouse, made dropper only work on paint, image class added for imported image resizing and dragging.  
+Alisa: Made a new class to work on a paintbrush tool.
 6/3/22  
 Gabriel: Worked on image class.  
+Alisa: Read about and worked with blend modes with pgraphics
 6/5/22  
 Gabriel: kept working on image class.  
+Alisa: Continued to work on and read about blend modes
 6/6/22  
 Gabriel: images now move with dragging, and can resize. Fixed image importing and exporting breaking by adding makeshift await and using a while loop to delay whole program while importing and exporting.  
+Alisa: Added a fix to layers where creating a new layer would automatically "enable" it and started work on a potential spray tool
 6/7/22  
-Gabriel: merged with Alisa's branch and fixed broken cntrl y and z.   
+Gabriel: merged with Alisa's branch and improved cntrl y and z.   
 6/8/22  
 Gabriel: fixed control y and z layer switch issues.  
+Alisa: Worked on designing a better interface for the program.
 6/10/22:
 Gabriel: Fixed cursor border to make drawing easier, fixed image resizing issues.   
+Alisa: Added to brush / blend mode and continued working on the spray tool.
 6/12/22:  
 Gabriel: did a full ui rework and made empty background gray. Merged with main, fixing all conflicts, and fixed borer by making it inverted.  
+Alisa: Updated documentation, finished updated UML and added it to prototype, finalized my design of the new ui and discussed it with Gabriel, pushed new changes to main and fixed a few minor typos
