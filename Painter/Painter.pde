@@ -84,6 +84,9 @@ void mouseClicked() {
   } else if ((mouseX > 555 && mouseX < 585) && (mouseY > 90 && mouseY < 120)) {
     t = pntr;
   }
+  else if ((mouseX > 615 && mouseX < 645) && (mouseY > 90 && mouseY < 120)) {
+    t = w;
+  }
   else if ((mouseX > 30 && mouseX < 60) && (mouseY > 90 && mouseY < 120)) {
     Color c;
     c = JColorChooser.showDialog(null, "Choose a Color", Color.black);
@@ -229,6 +232,8 @@ void draw() {
   square(495, 90, 30);
    fill((t.equals(pntr))? #00ff00 : 255);
   square(555, 90, 30);
+   fill((t.equals(w))? #00ff00 : 255);
+  square(615, 90, 30);
   fill(255);
   square(795,90,30);
   square(855,90,30);
@@ -244,6 +249,8 @@ void draw() {
   text("pen", 377, 105);
   textSize(10);
   text("eraser", 315, 105);
+  text("brush", 615, 105);
+
   textSize(9);
   text("bucket", 435, 105);
   text("pointer", 555, 105);
@@ -280,7 +287,7 @@ void draw() {
         if(a.count2 > 0 )
       a.count2--;
 }
-if((t ==p || t ==e )&& mouseY > 120){
+if((t ==p || t ==e || t==w)&& mouseY > 120){
     pushStyle();
     noCursor();
     strokeWeight(0);
