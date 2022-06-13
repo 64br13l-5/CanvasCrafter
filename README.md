@@ -11,9 +11,10 @@ Final project for Mr. K's class, Gabriel Small and Alisa Aleksandrova
 ## Prototype Document
 
 > https://docs.google.com/document/d/1oBpQWmZz5VQUnwzEelrC2NTm3FDGipTzGh3_sjGXFHs/edit?usp=sharing
+## Run/Compile Instructions:
+> Run via processing and just press start. Its a pretty self explanatory paint app. The + and - buttons add/remove layers, respectively. When a layer is highlighted, it is visible, and when a layer is covered by a blue arrow, it is the selected layer in use. The clear button clears current layer, and the tools are pretty simple. The image export always exports an image called "image.jpg" and the import can import any image file type. The image import creates a new image layer, which is just an image, moveable and resizable by pointer once the layer is selected (has a blue arrow above). The slider is for paint size, and the colored circle is for the paint color. 
+## WorkLog:
 
-
-WorkLog:  
 5/23/22  
 Gabriel: Started Drawing using layers, added basic eraser and pen tool and a color picker    
 Alisa: tweaked the way the tools class works, added a slider for strokewidth  
