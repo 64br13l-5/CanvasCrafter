@@ -16,46 +16,6 @@ public class paint {
     this.eraser = eraser;
     this.brush = brush;
   }
-  //public void filltool(int X,int Y){
-  //  float t = millis();
-  //  if(X > width || X<0 || Y>height || Y<0) return;
-  //  loadPixels();
-  //  color C = pixels[X+Y*width];
-  //  if(color(c) == C) return;
-  //  Stack<TwoPoint> s = new Stack<TwoPoint>();
-  //  s.add(new TwoPoint(X,X,Y,1));
-  //  s.add(new TwoPoint(X,X,Y-1,-1));
-  //  while (!s.isEmpty()){
-  //    TwoPoint p = s.pop();
-  //    int x = p.x1;
-  //    if(inside(x,p.y,C)){
-  //      while(inside(x-1,p.y,C)){
-  //        pixels[(x-1)+p.y*width] = color(c);
-  //        x--;
-  //      }
-  //    }
-  //    if(x < p.x1)
-  //      s.add(new TwoPoint(x,p.x1-1,p.y-p.dy,-p.dy));
-  //    while(p.x1 <= p.x2){
-  //      while(inside(p.x1,p.y,C)){
-  //        pixels[p.x1+p.y*width] = color(c);
-  //        p.x1++;
-  //        s.add(new TwoPoint(x,p.x1-1,p.y+p.dy,p.dy));
-  //        if(p.x1-1 > p.x2)
-  //          s.add(new TwoPoint(p.x2+1,p.x1-1,p.y-p.dy,-p.dy));
-  //      }
-  //      p.x1++;
-  //      while(p.x1<p.x2 && !inside(p.x1,p.y,C)){
-  //        p.x1++;
-  //      }
-  //      x=p.x1;
-  //    }
-
-      
-  //  }
-  //  print(millis() -t);
-  //  updatePixels();
-  //}
   public void filltool2(int x,int y,canvas cv){
     float t = millis();
     
@@ -125,17 +85,5 @@ class Point{
   public Point(int x, int y){
     this.x = x; 
     this.y = y; 
-  }
-}
-class TwoPoint{
-  public int x1;
-  public int x2;
-  public int y;
-  public int dy;
-  public TwoPoint(int x,int x1,int y, int y1){
-    this.x1 = x; 
-    this.y = y; 
-    this.x2 = x1; 
-    this.dy = y1; 
   }
 }
